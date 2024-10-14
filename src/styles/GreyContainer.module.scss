@@ -1,12 +1,10 @@
-$orange: #E67E22;
-$grey: #ECF0F1;
-$blue: #3498DB;
-    
+@import 'variables';
+
 .GreyContainer{
     background-color: $grey;   
-    border-radius: 10px;
+    border-radius: $grey-container-border-radius;
     -webkit-box-shadow: 10px 10px 20px -5px rgba(0,0,0,0.75);
     -moz-box-shadow: 10px 10px 20px -5px rgba(0,0,0,0.75);
     box-shadow: 10px 10px 20px -5px rgba(0,0,0,0.75);
-    padding: 5%;
+    padding: $grey-container-padding;
 }

@@ -1,8 +1,13 @@
 import styles from '../styles/ConfirmationButton.module.scss';
 
-const ConfirmationButton = ({}) => {
-    return(
-        <button className={styles.button}>Confirm</button>
+const ConfirmationButton = ({ width, height, text }) => {
+    return (
+        <button 
+            className={styles.ConfirmationButton} 
+            style={{ width: width, height: height }}
+        >
+            {text}
+        </button>
     );
 }
 

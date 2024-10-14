@@ -1,0 +1,15 @@
+.MainContainer {
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                url('../assets/ucentral.jpg');
+    background-size: cover;
+    background-position: center center;
+    padding: 3% 5% 3% 5%;
+    box-sizing: border-box;
+}
+
+.FormInputsContainer{
+    background-color: royalblue;
+    box-sizing: border-box;
+}

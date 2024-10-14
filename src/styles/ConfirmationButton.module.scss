@@ -1,12 +1,12 @@
-$orange: #E67E22;
-$grey: #ECF0F1;
-$blue: #3498DB;
+@import 'Variables';
 
-.button{
+.ConfirmationButton{
     background-color: $orange;
     border: none;
-    border-radius: 10px;
+    border-radius: $confirmation-button-border-radius;
     color: $grey;
-    width: 200px;
-    height: 30px;
+    padding: $confirmation-button-padding;
+    margin: $confirmation-button-margin;
+    cursor: pointer;
+    font-size: $confirmation-button-font-size;
 }
