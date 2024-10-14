@@ -8,20 +8,27 @@ const Login = () => {
     return (
         <div className={styles.MainContainer}>
             <Components.GreyContainer height="80%" width="25%">
-                <div>
-                    <Components.Subtittle text='Ingresa a'></Components.Subtittle>
-                    <Components.Tittle text='Studify'></Components.Tittle>
-                    <hr />
+                <div className={styles.ElementsContainer}>
                     <div>
-                        <Components.Input width='100%' height='6vh' type='email' placeholder='Correo'/>
-                        <Components.Input width='100%' height='6vh' type='password' placeholder='Contraseña'/>
+                        <div>
+                            <Components.Subtittle text='Ingresa a'></Components.Subtittle>
+                            <Components.Tittle text='Studify'></Components.Tittle>
+                        </div>
+                        <hr />
+                        <div>
+                            <Components.Input width='100%' height='6vh' type='email' placeholder='Correo'/>
+                            <Components.Input width='100%' height='6vh' type='password' placeholder='Contraseña'/>
+                        </div>
+                        <Components.ConfirmationButton width='100%' height='5vh' text='Ingresar'></Components.ConfirmationButton>
+                        <hr />
+                        <div>
+                            <ThirdPartyLogin logo={microsoftLogo} name='Ingresa con Microsoft'/>
+                            <ThirdPartyLogin logo={googleLogo} name='Ingresa con Google'/>
+                        </div>
                     </div>
-                    <Components.ConfirmationButton width='100%' height='5vh' text='Ingresar'></Components.ConfirmationButton>
-                    <hr />
-                </div>
-                <div>
-                    <ThirdPartyLogin logo={microsoftLogo} name='Ingresa con Microsoft'/>
-                    <ThirdPartyLogin logo={googleLogo} name='Ingresa con Google'/>
+                    <div className={styles.Footer}>
+                        <Components.ForgotPasswordFooter></Components.ForgotPasswordFooter>
+                    </div>
                 </div>
             </Components.GreyContainer>    
         </div>

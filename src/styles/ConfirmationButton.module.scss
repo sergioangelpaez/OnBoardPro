@@ -1,6 +1,6 @@
 @import 'Variables';
 
-.ConfirmationButton{
+.ConfirmationButton {
     background-color: $orange;
     border: none;
     border-radius: $confirmation-button-border-radius;
@@ -9,4 +9,10 @@
     margin: $confirmation-button-margin;
     cursor: pointer;
     font-size: $confirmation-button-font-size;
+    transition: background-color 0.3s ease, color 0.3s ease;
+
+    &:hover {
+        background-color: darken($orange, 7%);
+        color: #fff;
+    }
 }

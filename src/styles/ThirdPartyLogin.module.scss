@@ -13,6 +13,12 @@
     padding: 2% 2% 2% 2%;
     box-sizing: border-box;
     display: flex;
+    transition: background-color 0.3s ease, color 0.3s ease;
+
+    &:hover {
+        background-color: $light-grey;
+        color: #fff;
+    }
 }
 
 .LogoContainer{
