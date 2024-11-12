@@ -1,0 +1,95 @@
+// Superadmin.module.scss
+
+.MainContainer {
+    width: 100vw;
+    height: 100vh;
+    background-color: #f5f7fa;
+    font-family: Arial, sans-serif;
+}
+
+.Header {
+    font-size: 2em;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #0078d4;
+    margin-bottom: 1em;
+    
+}
+
+.NavigationButtons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8rem; // Elimina cualquier espacio entre ellos
+    margin-bottom: 1.5em;
+
+    a{
+        font-size: 1em;
+        color: #fff;
+        background-color: #0078d4;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+
+        &:hover {
+            background-color: #005ea6;
+        }
+
+        // Opcional: puedes eliminar el borde redondeado del lado izquierdo o derecho de los botones para que parezcan un bloque continuo.
+        &:first-child {
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+        }
+
+        &:last-child {
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+    }
+}
+
+p{
+    color: #ffffff;
+    font-size: 1rem;
+}
+
+.DashboardContent {
+    display: flex;
+    justify-content: space-between;
+    gap: 2em;
+    padding: 1em;
+}
+
+.StatsSection,
+.ActivitySection {
+    flex: 1;
+    background-color: #ffffff;
+    padding: 1.5em;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.StatsSection h3,
+.ActivitySection h3 {
+    font-size: 1.2em;
+    color: #0078d4;
+    margin-bottom: 1em;
+}
+
+.StatsSection p,
+.ActivitySection li {
+    font-size: 1em;
+    margin-bottom: 0.5em;
+    color: #333;
+}
+
+.ActivitySection ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.ActivitySection li {
+    padding: 0.5em 0;
+    border-bottom: 1px solid #eee;
+}
