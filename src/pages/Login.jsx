@@ -21,7 +21,7 @@ const Login = () => {
         console.log("Botón de login presionado"); 
         try {
             const response = await axios.post(
-                `https://studifyuc.onrender.com/api/auth/localuser`,
+                `${process.env.REACT_APP_API_URL}/api/auth/localuser`,
                 { email, password },
                 { headers: { 'Content-Type': 'application/json' } }
             );
