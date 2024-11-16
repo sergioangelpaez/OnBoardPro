@@ -5,7 +5,7 @@ const ConfirmationButton = ({ width, height, text, onClick }) => {
         <button 
             className={styles.ConfirmationButton} 
             style={{ width: width, height: height }}
-            onClick={onClick} // Asegúrate de pasar la prop onClick aquí
+            onClick={onClick}
         >
             {text}
         </button>
