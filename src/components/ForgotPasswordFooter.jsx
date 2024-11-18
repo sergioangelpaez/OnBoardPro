@@ -1,8 +1,8 @@
 import styles from '../styles/ForgotPasswordFooter.module.scss';
 
-const ForgotPasswordFooter = () => {
+const ForgotPasswordFooter = ({onClick}) => {
     return (
-        <a href=""><span className={styles.ForgotPasswordFooter}>¿Olvidaste tu contraseña?</span> </a>
+        <span onClick={onClick}className={styles.ForgotPasswordFooter}>¿Olvidaste tu contraseña?</span>
     );
 }
 

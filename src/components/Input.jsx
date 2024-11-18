@@ -7,8 +7,8 @@ const Input = ({ width, height, type, placeholder, value, onChange }) => {
             style={{ width: width, height: height }}
             type={type} 
             placeholder={placeholder} 
-            value={value} // Esto establece el valor del campo de texto
-            onChange={onChange} // Esto asegura que el valor se actualice cuando el usuario lo cambie
+            value={value}
+            onChange={onChange}
         />
     );
 }
