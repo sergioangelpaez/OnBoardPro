@@ -1,0 +1,39 @@
+@import "variables";
+
+.ConfirmationChip{
+    position: fixed;
+    top: 80%;
+    right: 5%;
+    z-index: 1000;
+    width: 200px;
+    height: 100px;
+    background-color: $grey;
+    border-radius: 10px;
+    -webkit-box-shadow: 10px 10px 20px -5px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 20px -5px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 20px -5px rgba(0,0,0,0.75);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0% 1%;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.logoContainer{
+    width: 30%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.textContainer{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.9em;
+    color: $black;
+}

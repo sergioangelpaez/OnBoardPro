@@ -8,3 +8,4 @@ export {default as Modal} from './Modal.jsx';
 export {default as Dropdown} from './Dropdown.jsx';
 export {default as FileSelector} from './FileSelector.jsx';
 export {default as CloseButton} from './CloseButton.jsx';
+export {default as ConfirmationChip} from './ConfirmationChip.jsx';

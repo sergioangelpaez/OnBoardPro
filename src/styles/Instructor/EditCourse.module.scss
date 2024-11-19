@@ -1,0 +1,294 @@
+@import '../Variables.scss';
+
+.editCourseMainContainer{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    padding: 3% 5%;
+    box-sizing: border-box;
+    color: $black;
+    justify-content: space-between;
+}
+
+.activitiesContainer{
+    width: 30%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.backButtonContainer{
+    width: 100%;
+    height: 10%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.previewMainContainer{
+    width: 65%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.toolsContainer{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.tools{
+    height: 50%;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.toolsHeader{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    height: fit-content;
+    margin-bottom: 5%;
+}
+
+.toolsDividerContainer{
+    display: flex;
+    align-items: center;
+    margin-left: 3%;
+    flex-grow: 1;
+}
+
+.toolsTittle {
+    display: flex;
+    align-items: center;
+    font-size: 1em;
+    width: fit-content;
+}	
+
+.backButtonContainer{
+    margin-bottom: 10%;
+}
+
+.backButtonImgContainer{
+    width: 20%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.sectionsWrapper{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sectionContainer{
+    width: 100%;
+    min-height: 10vh;
+    border-radius: 10px;
+    -webkit-box-shadow: 10px 10px 20px -5px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 20px -5px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 20px -5px rgba(0,0,0,0.75);
+    padding: 5% 5%;
+    box-sizing: border-box;
+    background-color: #ECF0F1;
+    margin-bottom: 10%;
+}
+
+.activity {
+    width: 100%;
+    height: 5vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5%;
+    box-sizing: border-box;
+    cursor: pointer;
+    border-radius: 10px;
+    margin-bottom: 5%;
+    background-color: white;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.activity:hover {
+    background-color: #f2f2f2;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.75);
+}
+
+.activityName{
+    font-size: 0.85em;
+}
+
+.activityButtonsContainer{
+    display: flex;
+    width: 30%;
+    height: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.addActivity{
+    width: 100%;
+    height: 5vh;
+    margin: 2% 0% 2% 0%;
+    border-radius: $input-border-radius;
+    border: 2px dashed $grey;
+    font-size: $input-font-size;
+    padding: $input-padding;
+    color: $input-color;
+    box-sizing: border-box;
+    margin: $input-margin;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    text-align: center;
+    
+    transition: border-color 0.3s ease, background-color 0.3s ease; // Añadimos la transición para suavizar los cambios
+
+    &:hover {
+        border-color: $blue;
+        background-color: lighten($blue, 40%);
+    }
+}
+
+.addSection{
+    width: 100%;
+    height: 10vh;
+    margin: 2% 0% 2% 0%;
+    border-radius: $input-border-radius;
+    border: 2px dashed $grey;
+    font-size: $input-font-size;
+    padding: $input-padding;
+    color: $input-color;
+    box-sizing: border-box;
+    margin: $input-margin;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    text-align: center;
+    
+    transition: border-color 0.3s ease, background-color 0.3s ease; // Añadimos la transición para suavizar los cambios
+
+    &:hover {
+        border-color: $blue;
+        background-color: lighten($blue, 40%);
+    }
+}
+
+.sectionsFooter{
+    width: 100%;
+    height: 5vh;
+    display: flex;
+    justify-content: center;
+}
+
+.activitySettings{
+    width: 100%;
+    min-height: 10vh;
+    height: fit-content;
+
+    .toolsHeader{
+        margin-bottom: 2%;
+    }
+}
+
+.settingsContainer{
+    width: 70%;
+    height: 8vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5%;
+    box-sizing: border-box;
+    cursor: pointer;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.settings{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5%;
+}
+
+.settingsButtonsContainer{
+    width: 25%;
+    height: 8vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.settingsWrapper{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 5%;
+}
+
+.previewContainer{
+    width: 100%;
+    height: 100%;
+    background-color: $light-grey;   
+    border-radius: $grey-container-border-radius;
+    -webkit-box-shadow: 10px 10px 20px -5px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 20px -5px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 20px -5px rgba(0,0,0,0.75);
+    padding: $grey-container-padding;
+    box-sizing: border-box;
+}
+
+.ModalContainer{
+    width: 100%;
+    height: 100%;
+    padding: 3% 0%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.ModalTopContainer{
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.ModalButtonsContainer{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.errorText {
+    color: red;
+    font-size: 0.7em;
+    margin-top: 5px;
+    text-align: left;
+}

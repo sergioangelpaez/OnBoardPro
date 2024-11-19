@@ -8,6 +8,9 @@
     color: $input-color;
     box-sizing: border-box;
     margin: $input-margin;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .Input:focus{

@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import styles from "../styles/FileSelector.module.scss";
 
-const FileSelector = ({ onFileSelect }) => {
+const FileSelector = ({ onFileSelect, tittle}) => {
     const [fileName, setFileName] = useState("Lista de estudiantes");
-    const [error, setError] = useState(""); // Estado para manejar errores
+    const [error, setError] = useState("");
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
         if (file) {
-            const fileType = file.name.split(".").pop(); // Extrae la extensión del archivo
+            const fileType = file.name.split(".").pop();
             if (fileType === "xlsx" || fileType === "csv") {
                 setFileName(file.name);
-                setError(""); // Limpia el mensaje de error si todo está bien
+                setError("");
                 if (onFileSelect) {
                     onFileSelect(file);
                 }
@@ -25,12 +25,12 @@ const FileSelector = ({ onFileSelect }) => {
     return (
         <div className={styles.fileSelectorContainer}>
             <div className={styles.fileSelector} onClick={() => document.getElementById("fileInput").click()}>
-                <p>{fileName}</p>
+                <p>{tittle}</p>
                 <input
                     id="fileInput"
                     type="file"
                     style={{ display: "none" }}
-                    accept=".xlsx, .csv" // Solo acepta archivos .xlsx y .csv
+                    accept=".xlsx, .csv"
                     onChange={handleFileChange}
                 />
             </div>

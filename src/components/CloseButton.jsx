@@ -1,6 +1,6 @@
 import styles from '../styles/CloseButton.module.scss';
 
-const CloseButton = ({ width, height, text, onClick }) => {
+const CloseButton = ({ width, height, text, onClick, children }) => {
     return (
         <button 
             className={styles.CloseButton} 
@@ -8,6 +8,7 @@ const CloseButton = ({ width, height, text, onClick }) => {
             onClick={onClick}
         >
             {text}
+            {children}
         </button>
     );
 }

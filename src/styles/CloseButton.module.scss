@@ -2,19 +2,20 @@
 
 .CloseButton {
     background-color: #e74c3c;
-    color: white;
     border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    color: white;
+    border-radius: $confirmation-button-border-radius;
+    padding: $confirmation-button-padding;
+    margin: $confirmation-button-margin;
+    cursor: pointer;
+    font-size: $confirmation-button-font-size;
+    transition: background-color 0.3s ease, color 0.3s ease;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: $confirmation-button-font-size;
 
     &:hover {
-        background-color: #c0392b;
-        cursor: pointer;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        background-color: darken(#e74c3c, 7%);
+        color: #fff;
     }
-} 
+}  

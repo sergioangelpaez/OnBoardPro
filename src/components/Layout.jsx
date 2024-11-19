@@ -48,7 +48,7 @@ const Layout = () => {
                     )}
                 </div>
             </header>
-            <main>
+            <main> 
                 <Outlet />
             </main>
         </div>

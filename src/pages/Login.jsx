@@ -21,7 +21,7 @@ const Login = () => {
     const toggleModal = (modalName) => {
         setModals((prev) => ({
             ...prev,
-            [modalName]: !prev[modalName],
+            [modalName]: !prev[modalName], 
         }));
     };
 

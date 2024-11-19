@@ -1,35 +1,108 @@
 import styles from '../../styles/Admin/AdminHome.module.scss';
-import { useState } from 'react';
+import { Component, useState } from 'react';
 import Tool from '../../components/Admin/Tool';
 import ConfirmationButton from '../../components/ConfirmationButton';
 import editIcon from '../../assets/edit-icon.png';
 import seeIcon from '../../assets/see-icon.png';
 import * as Components from '../../components/index';
+import { useNavigate } from 'react-router-dom';
 
 const AdminHome = () => {
-    
     const [userName, setUserName] = useState("User Name");
-
     const options = ["Instructor 1", "Instructor 2", "Instructor 3"];
+    const navigate = useNavigate();
+    
+    const [isConfirmationChipVisible, setIsConfirmationShipVisible] = useState(false);
 
-    const handleSelection = (selectedOption) => {
-        console.log("Seleccionaste:", selectedOption);
+    const handleChipClick = () => {
+        setIsConfirmationShipVisible(false);
+    };
+    
+    const [modal, setModal] = useState({
+        isCreateCourseModalOpen: false,
+    });
+
+    const [form, setForm] = useState({
+        courseName: "",
+        selectedInstructor: "",
+        studentFile: null,
+    });
+
+    const [errors, setErrors] = useState({
+        courseName: "",
+        selectedInstructor: "",
+        studentFile: "",
+    });
+
+    const toggleModal = (modalName) => {
+        setModal((prev) => ({
+            ...prev,
+            [modalName]: !prev[modalName],
+        }));
     };
 
-    const [modals, setModals] = useState({
-        isCreateCourseModalVisible: true
-    });
-    
+    const handleCreateCourse = () => {
+        toggleModal('isCreateCourseModalOpen');
+    };
+
+    const handleInputChange = (e) => {
+        setForm({ ...form, courseName: e.target.value });
+        setErrors({ ...errors, courseName: "" });
+    };
+
+    const handleSelection = (selectedOption) => {
+        setForm({ ...form, selectedInstructor: selectedOption });
+        setErrors({ ...errors, selectedInstructor: "" });
+    };
+
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            setForm({ ...form, studentFile: file });
+            setErrors({ ...errors, studentFile: "" });
+        } else {
+            setForm({ ...form, studentFile: null });
+            setErrors({ ...errors, studentFile: "Debe subir una lista de estudiantes." });
+        }
+    };
+
+    const handleFileSelect = (file) => {
+        console.log("Archivo recibido:", file);
+        setForm({ ...form, studentFile: file });
+    };
+
+    const validateForm = () => {
+        const newErrors = {
+            courseName: form.courseName ? "" : "El nombre del curso es obligatorio.",
+            selectedInstructor: form.selectedInstructor ? "" : "Debe seleccionar un instructor.",
+            studentFile: form.studentFile ? "" : "Debe subir una lista de estudiantes.",
+        };
+
+        setErrors(newErrors);
+        return Object.values(newErrors).every((error) => error === "");
+    };
+
+    const handleSubmit = () => {
+        if (validateForm()) {
+            toggleModal('isCreateCourseModalOpen');
+            setIsConfirmationShipVisible(true);
+        }
+    };
+
+    const navigateTo = (url) => {
+        console.log('aslkdj');
+        navigate(url);
+    }
+
     return (
         <div className={styles.adminMainContainer}>
             <div className={styles.toolsContainer}>
                 <div className={styles.profileBanner}>
                     <div className={styles.userPictureContainer}>
-                        <div className={styles.userPicture}>
-                        </div>
+                        <div className={styles.userPicture}></div>
                     </div>
                     <div className={styles.userNameContainer}>
-                        <p>Bievenido,<br /></p>
+                        <p>Bienvenido,<br /></p>
                         <div className={styles.userName}>
                             <p>{userName}</p>
                         </div>
@@ -44,9 +117,9 @@ const AdminHome = () => {
                             <hr />
                         </div>
                     </div>
-                    <Tool tittle="Crear curso"/>
-                    <Tool tittle="Asignar profesores"/>
-                    <Tool tittle="Reportes"/>
+                    <Tool tittle="Crear curso" onClick={handleCreateCourse} />
+                    <Tool tittle="Asignar profesores" />
+                    <Tool tittle="Reportes" />
                 </div>
             </div>
             <div className={styles.overviewContainer}>
@@ -70,10 +143,10 @@ const AdminHome = () => {
                                     <p>10 Estudiantes</p>
                                 </div>
                                 <div className={styles.CourseOverviewButtonsContainer}>
-                                    <ConfirmationButton width='40%' height='100%'>
+                                    <ConfirmationButton width='40%' height='100%' onClick={handleCreateCourse}>
                                         <img src={editIcon} width='15px' height='15px' alt="" />
                                     </ConfirmationButton>
-                                    <ConfirmationButton width='40%' height='100%'>
+                                    <ConfirmationButton width='40%' height='100%' onClick={() => navigateTo('/editar-curso')}>
                                         <img src={seeIcon} width='20px' height='15px' alt="" />
                                     </ConfirmationButton>
                                 </div>
@@ -91,10 +164,10 @@ const AdminHome = () => {
                                     <p>10 Estudiantes</p>
                                 </div>
                                 <div className={styles.CourseOverviewButtonsContainer}>
-                                    <ConfirmationButton width='40%' height='100%'>
+                                    <ConfirmationButton width='40%' height='100%' onClick={handleCreateCourse}>
                                         <img src={editIcon} width='15px' height='15px' alt="" />
                                     </ConfirmationButton>
-                                    <ConfirmationButton width='40%' height='100%'>
+                                    <ConfirmationButton width='40%' height='100%' onClick={() => navigateTo('/editar-curso')}>
                                         <img src={seeIcon} width='20px' height='15px' alt="" />
                                     </ConfirmationButton>
                                 </div>
@@ -165,36 +238,65 @@ const AdminHome = () => {
                             
                         </div>
                     </div>
-                </div>
+                </div> 
             </div>
 
             <Components.Modal
-                isVisible={modals.isCreateCourseModalVisible}
+                isVisible={modal.isCreateCourseModalOpen}
                 tittle="Crea un curso"
                 width="30%"
-                height="50%"
-                onClose={() => {}}
+                height="fit-content"
+                onClose={() => { toggleModal('isCreateCourseModalOpen'); }}
             >
                 <div className={styles.ModalContainer}>
                     <div className={styles.ModalTopContainer}>
-                        <Components.Input tittle="Nombre del curso" width='100%' height='5vh' placeholder='Nombre del curso'/>
-                        <Components.Dropdown 
-                            options={options} 
-                            placeholder="Instructor" 
-                            onChange={handleSelection} 
+                        <Components.Input
+                            tittle="Nombre del curso"
+                            width="100%"
+                            height="5vh"
+                            placeholder="Nombre del curso"
+                            value={form.courseName}
+                            onChange={handleInputChange}
                         />
+                        {errors.courseName && <p className={styles.errorText}>{errors.courseName}</p>}
+
+                        <Components.Dropdown
+                            options={options}
+                            placeholder="Instructor"
+                            onChange={handleSelection}
+                        />
+                        {errors.selectedInstructor && <p className={styles.errorText}>{errors.selectedInstructor}</p>}
+
                         <div className={styles.fileSelector}>
-                            <Components.FileSelector />
+                        <Components.FileSelector onFileSelect={(handleFileSelect)} onChange={handleFileChange}/>
+                            {errors.studentFile && <p className={styles.errorText}>{errors.studentFile}</p>}
                         </div>
                     </div>
                     <div className={styles.ModalButtonsContainer}>
-                        <Components.CloseButton text='Cancelar' width='40%' height='80%' onClick={() => {}} />
-                        <Components.ConfirmationButton text='Crear' width='40%' height='80%' />
+                        <Components.CloseButton
+                            text="Cancelar"
+                            width="40%"
+                            height="80%"
+                            onClick={() => { toggleModal('isCreateCourseModalOpen'); }}
+                        />
+                        <Components.ConfirmationButton
+                            text="Crear"
+                            width="40%"
+                            height="80%"
+                            onClick={handleSubmit}
+                        />
                     </div>
                 </div>
             </Components.Modal>
+
+            {isConfirmationChipVisible && (
+                <Components.ConfirmationChip 
+                    label="Curso creado correctamente." 
+                    onClick={handleChipClick} 
+                />
+            )}
         </div>
     );
-}
+};
 
 export default AdminHome;

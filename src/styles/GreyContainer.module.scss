@@ -1,11 +1,15 @@
 @import 'variables';
 
 .GreyContainer{
-    background-color: $grey;   
+    background-color: $light-grey;   
     border-radius: $grey-container-border-radius;
     -webkit-box-shadow: 10px 10px 20px -5px rgba(0,0,0,0.75);
     -moz-box-shadow: 10px 10px 20px -5px rgba(0,0,0,0.75);
     box-shadow: 10px 10px 20px -5px rgba(0,0,0,0.75);
     padding: $grey-container-padding;
     box-sizing: border-box;
+}
+
+hr{
+    border: 1px solid $grey;
 }
