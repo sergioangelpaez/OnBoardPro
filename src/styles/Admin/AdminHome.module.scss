@@ -1,0 +1,101 @@
+@import '../Variables.scss';
+
+.adminMainContainer{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    padding: 3% 5%;
+    box-sizing: border-box;
+    color: $black;
+}
+
+.toolsContainer{
+    width: 30%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.userNameContainer{
+    margin-left: 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 70%;
+    p{
+        margin: 0;
+    }
+}
+
+.userName{
+    font-size: 2em;
+    font-weight: 700;
+    color: $blue;
+
+    p{
+        margin: 0;
+    }
+}
+
+.overviewContainer{
+    width: 70%;
+    height: 100%;
+}
+
+.profileBanner{
+    width: 100%;
+    height: 20%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10%;
+}
+
+.userPictureContainer{
+    width: 30%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.userPicture{
+    width: 80%;
+    height: 80%;
+    border-radius: 50%;
+    background-color: $grey;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10%;
+    box-sizing: border-box;
+}
+
+.tools{
+    height: 50%;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.toolsHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    height: fit-content;
+    margin-bottom: 5%;
+}
+
+.dividerContainer{
+    display: flex;
+    align-items: center;
+    margin-left: 3%;
+    width: 100%;
+}
+
+.toolsTittle {
+    display: flex;
+    align-items: center;
+    font-size: 1em;
+}	
