@@ -1,6 +1,6 @@
 import styles from '../styles/ConfirmationButton.module.scss';
 
-const ConfirmationButton = ({ width, height, text, onClick }) => {
+const ConfirmationButton = ({ width, height, text, onClick, children }) => {
     return (
         <button 
             className={styles.ConfirmationButton} 
@@ -8,6 +8,7 @@ const ConfirmationButton = ({ width, height, text, onClick }) => {
             onClick={onClick}
         >
             {text}
+            {children}
         </button>
     );
 }

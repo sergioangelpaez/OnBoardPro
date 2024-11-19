@@ -3,8 +3,8 @@
 .ConfirmationButton {
     background-color: $orange;
     border: none;
+    color: white;
     border-radius: $confirmation-button-border-radius;
-    color: $grey;
     padding: $confirmation-button-padding;
     margin: $confirmation-button-margin;
     cursor: pointer;
@@ -18,4 +18,4 @@
         background-color: darken($orange, 7%);
         color: #fff;
     }
-}
+} 

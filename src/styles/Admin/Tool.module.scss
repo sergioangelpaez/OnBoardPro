@@ -9,10 +9,11 @@
     align-items: center;
     padding: 2% 4%;
     border-radius: 10px;
-    background-color: #f9f9f9;
+    background-color: $light-grey;
     box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    transition: background-color 0.2s ease, box-shadow 0.3s ease;
+    margin: 4% 0%;
 }
 
 .ToolContainer:hover {

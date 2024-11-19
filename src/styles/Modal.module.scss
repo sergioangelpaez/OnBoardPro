@@ -23,7 +23,7 @@
     box-sizing: border-box;
     transform: translate(-50%, -50%);
     z-index: 1000;
-    background-color: $grey;   
+    background-color: $light-grey;   
     border-radius: $grey-container-border-radius;
     -webkit-box-shadow: 10px 10px 20px -5px rgba(0,0,0,0.75);
     -moz-box-shadow: 10px 10px 20px -5px rgba(0,0,0,0.75);
@@ -45,6 +45,12 @@
     align-items: center;
     flex-grow: 1;
     margin: 0 2% 0 2%;
+    
+    hr{
+        width: 100%;
+        height: 1px;
+        background-color: $grey;
+    }
 }
 
 .closeButtonContainer{

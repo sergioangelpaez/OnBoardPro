@@ -1,0 +1,56 @@
+@import 'variables.scss';
+
+.Dropdown {
+    position: relative;
+    width: 100%;
+
+    &-Input {
+        border-radius: $input-border-radius;
+        border: $input-border;
+        font-size: $input-font-size;
+        padding: $input-padding;
+        color: $input-color;
+        box-sizing: border-box;
+        margin: $input-margin;
+        cursor: pointer;
+        background-color: #fff;
+        height: 5vh;
+        display: flex;
+        align-items: center;
+
+        &:focus {
+            outline: none;
+            border: 1px solid $blue;
+        }
+    }
+
+    &-Menu {
+        position: absolute;
+        top: calc(100% + 5px);
+        left: 0;
+        width: 100%;
+        max-height: 150px;
+        overflow-y: auto;
+        border: $input-border;
+        border-radius: $input-border-radius;
+        background: #fff;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        z-index: 10;
+        display: none;
+    }
+
+    &-Menu.open {
+        display: block;
+    }
+
+    &-Option {
+        padding: 10px;
+        font-size: $input-font-size;
+        cursor: pointer;
+
+        &:hover {
+            background-color: $blue;
+            color: white;
+        }
+    }
+}

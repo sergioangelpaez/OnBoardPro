@@ -7,6 +7,7 @@
     padding: 3% 5%;
     box-sizing: border-box;
     color: $black;
+    justify-content: space-between;
 }
 
 .toolsContainer{
@@ -39,8 +40,10 @@
 }
 
 .overviewContainer{
-    width: 70%;
+    width: 65%;
     height: 100%;
+    overflow-y: auto;
+    scrollbar-width: none;
 }
 
 .profileBanner{
@@ -78,7 +81,7 @@
     box-sizing: border-box;
 }
 
-.toolsHeader {
+.toolsHeader{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -87,7 +90,7 @@
     margin-bottom: 5%;
 }
 
-.dividerContainer{
+.toolsDividerContainer{
     display: flex;
     align-items: center;
     margin-left: 3%;
@@ -99,3 +102,133 @@
     align-items: center;
     font-size: 1em;
 }	
+
+.CoursesOverview{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 3%;
+
+    .toolsHeader{
+        margin-bottom: 2%;
+    }
+}
+
+.CourseOverview{
+    width: 100%;
+    height: 7vh;
+    cursor: pointer;
+    border: 1px solid $grey;
+    display: flex;
+    align-items: center;
+    padding: 1.3% 4%;
+    border-radius: 10px;
+    background-color: $light-grey;
+    box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    margin-bottom: 2%;
+    transition: background-color 0.2s ease, box-shadow 0.3s ease;
+}
+.CourseOverview:hover {
+    background-color: #e6e6e6;
+    box-shadow: 4px 8px 8px rgba(0, 0, 0, 0.2);
+}
+
+.CourseOverviewInfo{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    p{
+        margin: 0;
+    }
+}
+
+.CourseOverviewDetails{
+    display: flex;
+    flex-direction: row;
+    gap: 5%;
+    justify-content: flex-end;
+    width: 60%;
+    height: 100%;
+    align-items: center;
+}
+
+.CourseOverviewButtonsContainer{
+    display: flex;
+    flex-direction: row;
+    width: 20%;
+    height: 100%;
+    justify-content: space-between;
+    box-sizing: border-box;
+
+    .ConfirmationButton{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 2%;
+    }
+}
+
+.ReportsOverview{
+    width: 100%;
+    height: 30vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    .toolsHeader{
+        margin-bottom: 2%;
+    }
+}
+
+.ReportOverview{
+    width: 45%;
+    height: 100%;
+    border-radius: 10px;
+    background-color: $light-grey;
+    box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    transition: background-color 0.2s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.ReportOverview:hover{
+    background-color: #e6e6e6;
+    box-shadow: 4px 8px 8px rgba(0, 0, 0, 0.2);
+}
+
+.fileSelector{
+    width: 100%;
+}
+
+.ModalContainer{
+    width: 100%;
+    height: 100%;
+    padding: 3% 0%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.ModalTopContainer{
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.ModalButtonsContainer{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}

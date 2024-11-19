@@ -1,9 +1,10 @@
 import styles from '../../styles/Admin/Tool.module.scss';
-import GreyContainer from '../GreyContainer';
 
-const Tool = ( {tittle, onclick} ) => {
+const Tool = ( {tittle, onClick} ) => {
     return (
-        <div className={styles.ToolContainer}>
+        <div className={styles.ToolContainer}
+            onClick={onClick}
+        >
             {tittle}
         </div>
     );
