@@ -4,12 +4,14 @@ const passport = require('passport');
 const router = express.Router();
 const path = require('path');
 
+require('../api-ext/google/googleproperties.js');
+
 
 // Importa el controlador de autenticación
-const AuthController = require('../controllers/authcontroller.js');
+const AuthController = require('../control/authcontroller.js');
 
 // Definir rutas
-router.post('/localuser', AuthController.AuthUser ); // Ruta para iniciar sesión
+router.post('/localuser', AuthController.AuthUserByNormalMethod ); // Ruta para iniciar sesión
 
 router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }) ); // Ruta para iniciar sesión
 
@@ -22,13 +24,26 @@ router.get('/google/callback',
         }
 
         // Aquí 'req.user' contendrá el perfil del usuario autenticado
-        const userEmail = req.user.emails[0].value; // Obtiene el correo electrónico
+        const userEmail = req.user.email; // Obtiene el correo electrónico
         console.log(`Usuario autenticado: ${userEmail}`); // Imprime el correo electrónico en la consola
 
         // Redirige a la página de éxito o envía una respuesta JSON
-        res.status(200).sendFile(path.join(__dirname, '../public/inicio.html'));
+        res.status(200).redirect('/SuperadminGui');
     }
 );
+
+router.get('/protected', (req, res) => {
+    if (req.isAuthenticated()) {
+        res.json({
+            message: 'Ruta protegida',
+            user: req.user // Incluye el rol y otros datos
+        });
+    } else {
+        res.status(401).send('No autenticado');
+    }
+});
+
+
 
 
 module.exports = router; // Exporta el router
