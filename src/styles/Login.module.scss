@@ -45,3 +45,19 @@ hr{
     font-size: 0.8em;
     margin: 3% 0 3% 0;
 }
+
+.spinner{
+    border: 2px solid $blue;
+    border-left-color: $orange;
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    animation: spin 1s linear infinite;
+    box-sizing: border-box;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}

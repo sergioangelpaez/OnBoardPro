@@ -1,14 +1,16 @@
 import styles from '../../styles/Admin/AdminHome.module.scss';
-import { Component, useState } from 'react';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../controllers/authContext';
 import Tool from '../../components/Admin/Tool';
 import ConfirmationButton from '../../components/ConfirmationButton';
 import editIcon from '../../assets/edit-icon.png';
 import seeIcon from '../../assets/see-icon.png';
 import * as Components from '../../components/index';
-import { useNavigate } from 'react-router-dom';
 
 const AdminHome = () => {
-    const [userName, setUserName] = useState("User Name");
+    const { userData } = useAuth();
+    const [userName, setUserName] = useState(userData ? userData.user.email : "Username");
     const options = ["Instructor 1", "Instructor 2", "Instructor 3"];
     const navigate = useNavigate();
     
@@ -143,10 +145,10 @@ const AdminHome = () => {
                                     <p>10 Estudiantes</p>
                                 </div>
                                 <div className={styles.CourseOverviewButtonsContainer}>
-                                    <ConfirmationButton width='40%' height='100%' onClick={handleCreateCourse}>
+                                    <ConfirmationButton width='40%' height='100%' onClick={() => navigateTo('/editar-curso')} isDisabled={false}>
                                         <img src={editIcon} width='15px' height='15px' alt="" />
                                     </ConfirmationButton>
-                                    <ConfirmationButton width='40%' height='100%' onClick={() => navigateTo('/editar-curso')}>
+                                    <ConfirmationButton width='40%' height='100%' isDisabled={false}>
                                         <img src={seeIcon} width='20px' height='15px' alt="" />
                                     </ConfirmationButton>
                                 </div>
@@ -164,10 +166,10 @@ const AdminHome = () => {
                                     <p>10 Estudiantes</p>
                                 </div>
                                 <div className={styles.CourseOverviewButtonsContainer}>
-                                    <ConfirmationButton width='40%' height='100%' onClick={handleCreateCourse}>
+                                    <ConfirmationButton width='40%' height='100%' onClick={() => navigateTo('/editar-curso')} isDisabled={false}>
                                         <img src={editIcon} width='15px' height='15px' alt="" />
                                     </ConfirmationButton>
-                                    <ConfirmationButton width='40%' height='100%' onClick={() => navigateTo('/editar-curso')}>
+                                    <ConfirmationButton width='40%' height='100%' onClick={() => navigateTo('/editar-curso')} isDisabled={false}>
                                         <img src={seeIcon} width='20px' height='15px' alt="" />
                                     </ConfirmationButton>
                                 </div>
@@ -192,10 +194,10 @@ const AdminHome = () => {
                                     <p>10 Cursos</p>
                                 </div>
                                 <div className={styles.CourseOverviewButtonsContainer}>
-                                    <ConfirmationButton width='40%' height='100%'>
+                                    <ConfirmationButton width='40%' height='100%' isDisabled={false}>
                                         <img src={editIcon} width='15px' height='15px' alt="" />
                                     </ConfirmationButton>
-                                    <ConfirmationButton width='40%' height='100%'>
+                                    <ConfirmationButton width='40%' height='100%' isDisabled={false}>
                                         <img src={seeIcon} width='20px' height='15px' alt="" />
                                     </ConfirmationButton>
                                 </div>
@@ -210,10 +212,10 @@ const AdminHome = () => {
                                     <p>10 Cursos</p>
                                 </div>
                                 <div className={styles.CourseOverviewButtonsContainer}>
-                                    <ConfirmationButton width='40%' height='100%'>
+                                    <ConfirmationButton width='40%' height='100%' isDisabled={false}>
                                         <img src={editIcon} width='15px' height='15px' alt="" />
                                     </ConfirmationButton>
-                                    <ConfirmationButton width='40%' height='100%'>
+                                    <ConfirmationButton width='40%' height='100%' isDisabled={false}>
                                         <img src={seeIcon} width='20px' height='15px' alt="" />
                                     </ConfirmationButton>
                                 </div>

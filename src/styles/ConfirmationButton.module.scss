@@ -19,3 +19,18 @@
         color: #fff;
     }
 }  
+
+.ConfirmationButtonDisabled {
+    background-color: $grey;
+    border: none;
+    color: white;
+    border-radius: $confirmation-button-border-radius;
+    padding: $confirmation-button-padding;
+    margin: $confirmation-button-margin;
+    cursor: not-allowed;
+    font-size: $confirmation-button-font-size;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

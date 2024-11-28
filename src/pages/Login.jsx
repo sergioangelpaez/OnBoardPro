@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import styles from '../styles/Login.module.scss';
 import * as Components from '../components/index';
 import { useNavigate } from 'react-router-dom';
+import { handleLogin } from '../controllers/loginController';
+import { useAuth } from '../controllers/authContext';
 
 const Login = () => {
+    const { setUserData } = useAuth();
     const [modals, setModals] = useState({
         isFirstModalVisible: false,
         isSecondModalVisible: false,
@@ -12,6 +15,7 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     const [recoverEmail, setRecoverEmail] = useState('');
     const [recoverErrorMessage, setRecoverErrorMessage] = useState('');
@@ -40,38 +44,17 @@ const Login = () => {
         toggleModal('isSecondModalVisible');
     };
 
-    const handleLogin = async () => {
-        if (!isValidEmail(email)) {
-            setErrorMessage('Por favor, ingresa un correo electrónico válido.');
-            return;
-        }
-
-        if(!password) {
-            setErrorMessage('Por favor, ingresa tu contraseña.');
-            return;
-        }
-
-        setErrorMessage('');
-        try {
-            const response = await fetch ('http://localhost:3001/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email, password }),
-            });
-            
-            if(!response.ok){
-                throw new Error('Usuario o contraseña incorrectos.');
-            }
-
-            const data = await response.json();
-            console.log('Login exitoso', data);
-            navigate('/home');
-        }catch (error) {
-            console.error('Ocurrió un error al iniciar sesión', error);
-            setErrorMessage(error.message);
-        }
+    const handleLoginWrapper = async () => {
+        setIsLoading(true);
+        await handleLogin({
+            email,
+            password,
+            navigate,
+            setErrorMessage,
+            isValidEmail,
+            setUserData 
+        });
+        setIsLoading(false);
     };
 
     return (
@@ -106,8 +89,9 @@ const Login = () => {
                         <Components.ConfirmationButton
                             width="100%"
                             height="5vh"
-                            text="Ingresar"
-                            onClick={handleLogin}
+                            text={isLoading ? <div className={styles.spinner}></div> : "Ingresar"}
+                            isDisabled={isLoading}
+                            onClick={isLoading ? null : handleLoginWrapper}
                         />
                         <hr />
                     </div>

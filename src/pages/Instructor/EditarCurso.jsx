@@ -5,12 +5,21 @@ import CloseIcon from '../../assets/close.png';
 import AddIcon from '../../assets/plus.png';
 import * as Components from '../../components/index';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const EditarCurso = () => {
 
+    const [items, setItems] = useState([
+        { id: 1, type: "Actividad", name: "Actividad 1", description: "Descripción de actividad 1" },
+        { id: 2, type: "Entregable", name: "Entregable 1", description: "Descripción de entregable 1" }
+    ]);    
+
+    const navigate = useNavigate();
     const stateOptions = ["Activo", "Desactivado", "Cancelado"];
     const availabilityOptions = ["Publico", "Privado"];
     const achievmentsOptions = ["Logro 1", "Logro 2", "Logro 3"];
+    const addOptions = ["Actividad", "Entregable"];
+    const [selectedOption, setSelectedOption] = useState(null);
 
     const [isConfirmationChipVisible, setIsConfirmationShipVisible] = useState(false);
 
@@ -20,7 +29,9 @@ const EditarCurso = () => {
 
     const [modal, setModal] = useState({
         isAddActivityModalOpen: false,
-        isAddSectionModalOpen: false
+        isAddSectionModalOpen: false,
+        isAddModalOpen: false,
+        isAddEntregableModalOpen: false,
     });
 
     const toggleModal = (modalName) => {
@@ -34,6 +45,10 @@ const EditarCurso = () => {
         toggleModal('isAddActivityModalOpen');
     };
 
+    const handleAddEntregable = () => {
+        toggleModal('isAddEntregableModalOpen');
+    };
+
     const handleAddSection = () => {
         toggleModal('isAddSectionModalOpen');
     };
@@ -44,6 +59,30 @@ const EditarCurso = () => {
         activityFile: null,
     });
 
+    const [entregableForm, entregableSetForm] = useState({
+        entregableName: "",
+        entregableDesc: "",
+    });
+
+    const handleAddEntregableInputChange = (e) => {
+        entregableSetForm({ ...entregableForm, entregableName: e.target.value });
+        setErrors({ ...errors, entregableName: "" });
+    };
+
+    const handleAddEntregableTextAreaChange = (e) => {
+        entregableSetForm({ ...entregableForm, entregableDesc: e.target.value });
+        setErrors({ ...errors, entregableDesc: "" });
+    };
+
+    const validateEntregableForm = () => {
+        const newErrors = {
+            entregableName: entregableForm.entregableName ? "" : "El nombre del entregable es obligatorio.",
+            entregableDesc: entregableForm.entregableDesc ? "" : "La descripcion del entregable es obligatoria.",
+        };
+        setErrors(newErrors);
+        return Object.values(newErrors).every((error) => error === "");
+    };
+
     const [sectionForm, setSectionForm] = useState({
         sectionName: "",
     });
@@ -53,6 +92,7 @@ const EditarCurso = () => {
         activityDesc: "",
         activityFile: "",
         sectionName: "",
+        entregableName: "",
     });
 
     const handleInputChange = (e) => {
@@ -120,13 +160,39 @@ const EditarCurso = () => {
         }
     };
 
+    const handleEntregableSubmit = () => {
+        if (validateEntregableForm()) {
+            const newEntregable = {
+                id: items.length + 1,
+                type: "Entregable",
+                name: entregableForm.entregableName,
+                description: entregableForm.entregableDesc
+            };
+            setItems((prevItems) => [...prevItems, newEntregable]); // Agrega al estado
+            toggleModal('isAddEntregableModalOpen'); // Cierra el modal
+            setIsConfirmationShipVisible(true);
+        }
+    };    
+
+    const goBackButton = () => {
+        navigate("/home");
+    }
+
+    const handleAdd = () => {
+        toggleModal('isAddModalOpen');
+        if (selectedOption === "Actividad") {
+            toggleModal('isAddActivityModalOpen');
+        } else if (selectedOption === "Entregable") {
+            toggleModal('isAddEntregableModalOpen');
+        }
+    };    
 
     return (
         <div className={styles.editCourseMainContainer}>
             <div className={styles.activitiesContainer}>
                 <div className={styles.backButtonContainer}>
-                    <div className={styles.backButtonImgContainer}>
-                        <img src={BackButton} width='55%' height='80%' alt="" />
+                    <div className={styles.backButtonImgContainer} onClick={goBackButton}>
+                        <img src={BackButton} width='50px' height='50px' alt="" />
                     </div>
                     <div className={styles.backButtonTextContainer}>
                         <p>Volver al inicio</p>
@@ -144,41 +210,22 @@ const EditarCurso = () => {
                                 </div>
                             </div>
                             <div className={styles.sectionContainer}>
-                                <div className={styles.toolsHeader}>
-                                    <div className={styles.toolsTittle}>
-                                        <span>Nombre de la sección</span>
+                                {items.map((item) => (
+                                    <div key={item.id} className={styles.activity}>
+                                        <div className={styles.activityName}>
+                                            <p>{item.name}</p>
+                                        </div>
+                                        <div className={styles.activityButtonsContainer}>
+                                            <Components.ConfirmationButton width="30%" height="70%" isDisabled={false}>
+                                                <img src={EditIcon} width="15px" height="15px" alt="Editar" />
+                                            </Components.ConfirmationButton>
+                                            <Components.CloseButton width="30%" height="70%">
+                                                <img src={CloseIcon} width="15px" height="15px" alt="Eliminar" />
+                                            </Components.CloseButton>
+                                        </div>
                                     </div>
-                                    <div className={styles.toolsDividerContainer}>
-                                        <hr />
-                                    </div>
-                                </div>
-                                <div className={styles.activity}>
-                                    <div className={styles.activityName}>
-                                        <p>Nombre actividad</p>
-                                    </div>
-                                    <div className={styles.activityButtonsContainer}>
-                                        <Components.ConfirmationButton width='30%' height='70%'>
-                                            <img src={EditIcon} width='15px' height='15px' alt="" />
-                                        </Components.ConfirmationButton>
-                                        <Components.CloseButton width='30%' height='70%'>
-                                            <img src={CloseIcon} width='15px' height='15px' alt="" />
-                                        </Components.CloseButton>
-                                    </div>
-                                </div>
-                                <div className={styles.activity}>
-                                    <div className={styles.activityName}>
-                                        <p>Nombre entregable</p>
-                                    </div>
-                                    <div className={styles.activityButtonsContainer}>
-                                        <Components.ConfirmationButton width='30%' height='70%'>
-                                            <img src={EditIcon} width='15px' height='15px' alt="" />
-                                        </Components.ConfirmationButton>
-                                        <Components.CloseButton width='30%' height='70%'>
-                                            <img src={CloseIcon} width='15px' height='15px' alt="" />
-                                        </Components.CloseButton>
-                                    </div>
-                                </div>
-                                <div className={styles.addActivity} onClick={handleAddActivity}>
+                                ))}
+                                <div className={styles.addActivity} onClick={() => toggleModal('isAddModalOpen')}>
                                     <img src={AddIcon} width='15px' height='15px' alt="" />
                                 </div>
                             </div>
@@ -229,6 +276,36 @@ const EditarCurso = () => {
             </div>
 
             <Components.Modal
+                isVisible={modal.isAddModalOpen}
+                tittle="¿Qué quieres crear?"
+                width="30%"
+                height="fit-content"
+                onClose={() => { toggleModal('isAddModalOpen'); }}
+            >
+                <div className={styles.ModalContainer}>
+                    <div className={styles.ModalTopContainer}>
+                        <Components.Dropdown options={addOptions} placeholder='Selecciona una opción' onChange={(value) => setSelectedOption(value)}/>
+                    </div>
+                    <div className={styles.ModalButtonsContainer}>
+                        <Components.CloseButton
+                            text="Cancelar"
+                            width="40%"
+                            height="80%"
+                            onClick={() => {toggleModal('isAddActivityModalOpen')}}
+                        />
+                        <Components.ConfirmationButton
+                            text="Crear"
+                            width="40%"
+                            height="80%"
+                            onClick={handleAdd}
+                            isDisabled={false}
+                        />
+                    </div>
+                </div>
+            </Components.Modal>
+
+            {/* //Activity Modal */}
+            <Components.Modal
                 isVisible={modal.isAddActivityModalOpen}
                 tittle="Crea una actividad"
                 width="30%"
@@ -275,6 +352,54 @@ const EditarCurso = () => {
                             width="40%"
                             height="80%"
                             onClick={handleSubmit}
+                        />
+                    </div>
+                </div>
+            </Components.Modal>
+
+            {/* //Entregable Modal */}
+            <Components.Modal
+                isVisible={modal.isAddEntregableModalOpen}
+                tittle="Crea un entregable"
+                width="30%"
+                height="fit-content"
+                onClose={() => { toggleModal('isAddEntregableModalOpen'); }}
+            >
+                <div className={styles.ModalContainer}>
+                    <div className={styles.ModalTopContainer}>
+                        <Components.Input
+                            tittle="Nombre del entregable"
+                            width="100%"
+                            height="5vh"
+                            placeholder="Nombre del entregable"
+                            value={entregableForm.entregableName}
+                            onChange={handleAddEntregableInputChange}
+                        />
+                        {errors.entregableName && <p className={styles.errorText}>{errors.entregableName}</p>}
+
+                        <Components.Input
+                            tittle="Descripcion del entregable"
+                            width="100%"
+                            height="10vh"
+                            type='textarea'
+                            placeholder="Descripcion del entregable"
+                            value={entregableForm.entregableDesc}
+                            onChange={handleAddEntregableTextAreaChange}
+                        />
+                    </div>
+                    <div className={styles.ModalButtonsContainer}>
+                        <Components.CloseButton
+                            text="Cancelar"
+                            width="40%"
+                            height="80%"
+                            onClick={() => {toggleModal('isAddEntregableModalOpen'); }}
+                        />
+                        <Components.ConfirmationButton
+                            text="Crear"
+                            width="40%"
+                            height="80%"
+                            isDisabled={false}
+                            onClick={handleEntregableSubmit}
                         />
                     </div>
                 </div>
