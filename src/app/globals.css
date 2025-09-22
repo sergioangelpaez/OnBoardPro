@@ -6,7 +6,7 @@
   /* === Light mode === */
   --color-bg-main: #f9fafb;
   --color-card-bg: #ffffff;
-  --color-border: #e5e7eb;
+  --color-border: #c6c8cf;
 
   --color-text-main: #111827;
   --color-text-secondary: #6b7280;
@@ -22,9 +22,12 @@
   --color-accent-hover: #ea580c;
   --color-accent-active: #c2410c;
 
+  --color-error: #dc2626;
+  --color-error-hover: #d31a1a;
+  --color-error-active: #c91010;
+
   --color-success: #16a34a;
   --color-warning: #facc15;
-  --color-error: #dc2626;
 }
 
 @layer base {
