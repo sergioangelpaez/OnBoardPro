@@ -23,9 +23,11 @@ const Button: React.FC<ButtonProps> = ({
   const isDisabled = disabled || loading;
   return (
     <button
+      disabled={isDisabled}
       className={`rounded-sm p-2 cursor-pointer ${
         buttonVariants[variant] ?? buttonVariants.primary
-      } ${className} ${rest}`}
+      } ${className}`}
+      {...rest}
     >
       {loading ? "Loading..." : children}
     </button>

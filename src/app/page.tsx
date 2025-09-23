@@ -7,27 +7,34 @@ import Container from "@/components/Container";
 import ForgotPasswordModal from "@/components/ForgotPasswordModal";
 import { useState } from "react";
 import Divider from "@/components/Divider";
+import { useRouter } from "next/navigation";
 
-export default function Home() {
+const Login = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const router = useRouter();
+
+  const handleLoginRequest = () => {
+    router.push("/dashboard");
+  };
+
   return (
     <div
       className="relative w-full h-[100dvh] bg-cover bg-center text-text-main"
       style={{ backgroundImage: "url('/ucentralbg.jpg')" }}
     >
-      <div className="absolute inset-0 bg-black/50 z-0"></div>
+      <div className="absolute inset-0 bg-black/80 z-0"></div>
       <div className="flex items-center h-full z-10 p-10">
         <Container className="relative p-8 w-[30%]">
           <div className="border-border border-b-1 pb-5">
             <span className="text-text-secondary">Ingresa a</span>
             <h1 className="text-brand text-4xl font-bold">Onboard Pro</h1>
           </div>
-          <form action="submit">
+          <form action={handleLoginRequest}>
             <div className="flex flex-col py-5 gap-3">
               <FloatingInput
                 id="email"
                 label="Correo electrónico"
-                type="text"
+                type="email"
                 required
               />
               <FloatingInput
@@ -77,4 +84,6 @@ export default function Home() {
       </div>
     </div>
   );
-}
+};
+
+export default Login;
