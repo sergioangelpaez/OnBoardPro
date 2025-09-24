@@ -4,7 +4,9 @@
 
 @theme {
   /* === Light mode === */
-  --color-bg-main: #f9fafb;
+  --max-width-app: 1400px;
+
+  --color-bg-main: #f3f3f3;
   --color-card-bg: #ffffff;
   --color-border: #c6c8cf;
 
