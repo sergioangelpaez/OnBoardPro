@@ -31,7 +31,7 @@ const ThirdPartyLoginButton: React.FC<ThirdPartyLoginButtonProps> = ({
       className={`hover:bg-black/10 active:bg-black/20 flex items-center rounded-sm p-3 cursor-pointer border-1 gap-5 border-border w-full text-md ${className}`}
     >
       <img src={logoRoute} alt="" className="w-8 h-8" />
-      {text}
+      <p className="truncate">{text}</p>
     </button>
   );
 };
