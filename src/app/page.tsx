@@ -43,7 +43,12 @@ const Login = () => {
                 type="password"
                 required
               />
-              <Button type="submit" loading={false} variant="primary">
+              <Button
+                type="submit"
+                loading={false}
+                variant="secondary"
+                className="p-2"
+              >
                 <span>Login</span>
               </Button>
             </div>
