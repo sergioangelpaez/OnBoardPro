@@ -16,7 +16,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
   return (
     <div
       {...rest}
-      className={` bg-card-bg rounded-md shadow-lg w-full ${className} transition duration-300 hover:scale-102 hover:border-1 border-border`}
+      className={` bg-card-bg rounded-md shadow-lg h-full w-full ${className} transition duration-300 hover:scale-102 hover:border-1 border-border`}
     >
       <div className="h-[50%]">
         <img

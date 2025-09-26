@@ -6,7 +6,7 @@ import { useState } from "react";
 const Header = () => {
   const [name, setName] = useState("Sergio");
   return (
-    <header className="text-white w-full bg-brand p-5 flex justify-center shadow-lg shadow-black/40 z-10">
+    <header className="sticky top-0 text-white w-full bg-brand p-5 flex justify-center shadow-lg shadow-black/40 z-10">
       <div className="max-w-app w-full flex items-center justify-between">
         <h1 className="text-3xl font-semibold">Onboard Pro</h1>
         <nav aria-label="Main navigation">

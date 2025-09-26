@@ -3,9 +3,9 @@ import Header from "@/components/Header";
 
 const DashboardLayout = ({ children }: { children: ReactNode }) => {
   return (
-    <div className="flex flex-col h-[100dvh]">
+    <div className="flex flex-col h-screen">
       <Header />
-      <main className="h-full bg-bg-main">{children}</main>
+      <main className="bg-bg-main h-full overflow-hidden">{children}</main>
     </div>
   );
 };
