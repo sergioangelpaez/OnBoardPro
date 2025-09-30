@@ -3,13 +3,14 @@ import mockData from "@/mockData.json";
 const Table = () => {
   const cellStyle = "px-3 py-2";
 
-  // Calcular el máximo XP para normalizar las barras de progreso
-  const maxXp = Math.max(...mockData.map((student) => student.xp));
+  // Ordenar datos por nivel de mayor a menor
+  const sortedData = [...mockData].sort((a, b) => b.level - a.level);
+  const maxXp = Math.max(...sortedData.map((student) => student.xp));
 
   return (
-    <div className="bg-white p-2 rounded-lg transition duration-300 shadow-sm overflow-hidden">
+    <div className="bg-white p-2 rounded-lg transition duration-300 shadow-sm overflow-y-auto max-h-full">
       <table className="w-full text-left border-collapse">
-        <thead className="bg-gray-100 text-sm font-medium text-gray-600">
+        <thead className="bg-gray-100 text-sm font-medium text-gray-600 sticky top-0 z-10 shadow-sm">
           <tr>
             <th className={`${cellStyle} w-4 text-center`}>#</th>
             <th className={`${cellStyle} w-34`}>Estudiante</th>
@@ -18,7 +19,7 @@ const Table = () => {
           </tr>
         </thead>
         <tbody className="divide-y divide-gray-200 text-sm">
-          {mockData.map((student, index) => {
+          {sortedData.map((student, index) => {
             const progress = Math.round((student.xp / maxXp) * 100);
 
             return (
@@ -53,7 +54,7 @@ const Table = () => {
                     title={`${progress}%`}
                   >
                     <div
-                      className="h-full rounded-full bg-blue-500"
+                      className="h-full rounded-full bg-accent"
                       style={{ width: `${progress}%` }}
                     ></div>
                   </div>

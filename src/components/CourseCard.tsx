@@ -44,7 +44,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
         </div>
         <Button
           loading={false}
-          variant="primary"
+          variant="secondary"
           className="px-2 py-1 w-[50%] justify-center flex items-center gap-2"
         >
           <p>Ver curso</p>

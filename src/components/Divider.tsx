@@ -41,11 +41,7 @@ const Divider: React.FC<DividerProps> = ({
       </div>
     );
   } else {
-    return (
-      <div className={`flex bg-gray-300 items-center gap-4 ${className}`}>
-        <div className="h-px text-text-secondary flex-1"></div>
-      </div>
-    );
+    return <hr className="text-border" />;
   }
 };
 

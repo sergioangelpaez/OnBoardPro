@@ -5,6 +5,8 @@ import { useState } from "react";
 
 const Header = () => {
   const [name, setName] = useState("Sergio");
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
     <header className="sticky top-0 text-white w-full bg-brand p-5 flex justify-center shadow-lg shadow-black/40 z-10">
       <div className="max-w-app w-full flex items-center justify-between">
