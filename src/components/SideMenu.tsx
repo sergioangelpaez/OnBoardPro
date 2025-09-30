@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   Squares2X2Icon as SquaresSolid,
   BookOpenIcon as BookSolid,
@@ -10,6 +11,8 @@ import {
   CalendarDaysIcon as CalendarSolid,
   Cog6ToothIcon as SettingsSolid,
   QuestionMarkCircleIcon as HelpSolid,
+  Bars3Icon,
+  XMarkIcon,
 } from "@heroicons/react/24/solid";
 
 import {
@@ -23,8 +26,6 @@ import {
   ChevronRightIcon,
   ChevronLeftIcon,
 } from "@heroicons/react/24/outline";
-
-import { usePathname } from "next/navigation";
 
 const routes = [
   {
@@ -77,22 +78,31 @@ const footerRoutes = [
 const SideMenu = () => {
   const pathname = usePathname();
   const [collapsed, setCollapsed] = useState(false);
+  const [floatingOpen, setFloatingOpen] = useState(false);
 
   const toggleMenu = () => setCollapsed(!collapsed);
+  const toggleFloating = () => setFloatingOpen(!floatingOpen);
 
-  const renderLinks = (links: typeof routes) =>
+  // Cierra el menú flotante cuando cambia la ruta
+  useEffect(() => {
+    setFloatingOpen(false);
+  }, [pathname]);
+
+  const renderLinks = (links: typeof routes, isMobile = false) =>
     links.map(({ href, label, solid: SolidIcon, outline: OutlineIcon }) => {
       const isActive = pathname === href;
       const Icon = isActive ? SolidIcon : OutlineIcon;
 
       return (
         <div key={href} className="flex gap-4 items-center">
-          <div
-            className={`transition-all ${
-              isActive ? "border-r-6 border-accent rounded-r-lg h-10" : "h-8"
-            }`}
-            aria-hidden="true"
-          />
+          {!isMobile && (
+            <div
+              className={`transition-all ${
+                isActive ? "border-r-6 border-accent rounded-r-lg h-10" : "h-8"
+              }`}
+              aria-hidden="true"
+            />
+          )}
 
           <Link
             href={href}
@@ -114,52 +124,105 @@ const SideMenu = () => {
     });
 
   return (
-    <aside
-      id="side-menu"
-      className={`relative flex flex-col justify-between h-full transition-all duration-300 text-text-secondary ${
-        collapsed ? "w-16" : "w-64"
-      }`}
-      aria-label="Menú lateral de navegación"
-    >
-      {/* Button */}
-      <button
-        onClick={toggleMenu}
-        aria-label={collapsed ? "Abrir menú lateral" : "Cerrar menú lateral"}
-        aria-expanded={!collapsed}
-        aria-controls="side-menu"
-        title={collapsed ? "Abrir menú lateral" : "Cerrar menú lateral"}
-        className="absolute cursor-pointer -right-5 top-1/2 -translate-y-1/2 bg-brand text-accent p-2 rounded-full transition"
+    <>
+      {/* Menú escritorio */}
+      <aside
+        id="side-menu"
+        className={`hidden md:flex relative flex-col justify-between h-full transition-all duration-300 text-text-secondary ${
+          collapsed ? "w-16" : "w-64"
+        }`}
+        aria-label="Menú lateral de navegación"
       >
-        {collapsed ? (
-          <ChevronRightIcon className="size-7" aria-hidden="true" />
-        ) : (
-          <ChevronLeftIcon className="size-7" aria-hidden="true" />
-        )}
-      </button>
-
-      <div>
-        <div className="flex items-center justify-center mb-4 h-1/2">
-          {!collapsed && (
-            <h1
-              className="text-2xl font-bold truncate"
-              aria-label="Onboard Pro"
-            >
-              Onboard Pro
-            </h1>
+        <button
+          onClick={toggleMenu}
+          aria-label={collapsed ? "Abrir menú lateral" : "Cerrar menú lateral"}
+          aria-expanded={!collapsed}
+          aria-controls="side-menu"
+          title={collapsed ? "Abrir menú lateral" : "Cerrar menú lateral"}
+          className="absolute cursor-pointer -right-5 top-1/2 -translate-y-1/2 bg-brand text-white p-2 rounded-full transition"
+        >
+          {collapsed ? (
+            <ChevronRightIcon
+              className="size-7 text-white"
+              aria-hidden="true"
+            />
+          ) : (
+            <ChevronLeftIcon className="size-7 text-white" aria-hidden="true" />
           )}
+        </button>
+
+        <div>
+          <div className="flex items-center justify-center mb-4 h-1/2">
+            {!collapsed && (
+              <h1
+                className="text-2xl font-bold truncate"
+                aria-label="Onboard Pro"
+              >
+                Onboard Pro
+              </h1>
+            )}
+          </div>
+          <nav
+            className="flex flex-col gap-3"
+            aria-label="Navegación principal"
+          >
+            {renderLinks(routes)}
+          </nav>
         </div>
-        <nav className="flex flex-col gap-3" aria-label="Navegación principal">
-          {renderLinks(routes)}
+
+        <nav
+          className="flex flex-col gap-3 mb-4"
+          aria-label="Opciones de configuración"
+        >
+          {renderLinks(footerRoutes)}
         </nav>
+      </aside>
+
+      {/* Botón móvil */}
+      <div className="md:hidden fixed bottom-6 right-6 z-50">
+        <button
+          onClick={toggleFloating}
+          aria-label={
+            floatingOpen ? "Cerrar menú flotante" : "Abrir menú flotante"
+          }
+          aria-expanded={floatingOpen}
+          aria-controls="floating-menu"
+          className="bg-brand text-white p-3 rounded-full shadow-lg transition"
+        >
+          {floatingOpen ? (
+            <XMarkIcon className="size-7" />
+          ) : (
+            <Bars3Icon className="size-7" />
+          )}
+        </button>
       </div>
 
-      <nav
-        className="flex flex-col gap-3 mb-4"
-        aria-label="Opciones de configuración"
+      {/* Overlay + Menú flotante con fade */}
+      <div
+        className={`fixed inset-0 bg-black/60 backdrop-blur-sm z-40 transition-opacity duration-300 ${
+          floatingOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
+        onClick={toggleFloating}
+        aria-hidden="true"
+      />
+
+      <div
+        id="floating-menu"
+        className={`fixed bottom-20 right-6 z-50 bg-brand text-white rounded-2xl p-4 shadow-2xl w-64 transition-all duration-300 ${
+          floatingOpen
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 translate-y-3 pointer-events-none"
+        }`}
       >
-        {renderLinks(footerRoutes)}
-      </nav>
-    </aside>
+        <nav className="flex flex-col gap-3 mb-4">
+          {renderLinks(routes, true)}
+        </nav>
+        <hr className="border-black/20 my-2" />
+        <nav className="flex flex-col gap-3">
+          {renderLinks(footerRoutes, true)}
+        </nav>
+      </div>
+    </>
   );
 };
 
