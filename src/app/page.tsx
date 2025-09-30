@@ -46,10 +46,10 @@ const Login = () => {
               <Button
                 type="submit"
                 loading={false}
-                variant="secondary"
+                variant="primary"
                 className="p-2"
               >
-                <span>Login</span>
+                <span>Ingresar</span>
               </Button>
             </div>
           </form>

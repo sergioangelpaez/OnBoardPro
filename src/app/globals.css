@@ -4,14 +4,14 @@
 
 @theme {
   /* === Light mode === */
-  --max-width-app: 1400px;
+  /*--max-width-app: 1600px;*/
 
   --color-bg-main: #f3f3f3;
   --color-card-bg: #ffffff;
   --color-border: #c6c8cf;
 
   --color-text-main: #111827;
-  --color-text-secondary: #6b7280;
+  --color-text-secondary: #e4e4e4;
 
   --color-skeleton-light: #e5e7eb;
   --color-skeleton-dark: #d1d5db;
@@ -30,6 +30,13 @@
 
   --color-success: #16a34a;
   --color-warning: #facc15;
+
+  --color-gradient-brand: linear-gradient(
+    135deg,
+    var(--color-brand),
+    var(--color-brand-hover),
+    var(--color-brand-active)
+  );
 }
 
 @layer base {
@@ -56,5 +63,13 @@
     --color-success: #22c55e;
     --color-warning: #facc15;
     --color-error: #f87171;
+
+    /* === Brand gradient dark === */
+    --gradient-brand: linear-gradient(
+      135deg,
+      var(--color-brand),
+      var(--color-brand-hover),
+      var(--color-brand-active)
+    );
   }
 }
