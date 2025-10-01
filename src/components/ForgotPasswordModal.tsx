@@ -29,7 +29,7 @@ const ForgotPasswordModal: React.FC<ForgotPasswordModalProps> = ({
   return (
     <>
       <div className="absolute inset-0 bg-black/50 z-0 flex items-center justify-center">
-        <Container className="p-5 w-1/3 z-10 flex gap-3 flex-col">
+        <Container className="p-5 w-1/4 z-10 flex gap-3 flex-col">
           <h1 className="text-brand font-bold text-2xl">
             Restablece tu contraseña
           </h1>
@@ -54,7 +54,7 @@ const ForgotPasswordModal: React.FC<ForgotPasswordModalProps> = ({
                 <Button
                   variant="outline"
                   loading={false}
-                  className="w-30"
+                  className="w-30 p-1"
                   onClick={onClose}
                 >
                   <p>Cancelar</p>
@@ -75,7 +75,7 @@ const ForgotPasswordModal: React.FC<ForgotPasswordModalProps> = ({
                 <Button
                   variant="primary"
                   loading={false}
-                  className="w-30"
+                  className="w-30 p-1"
                   onClick={handleRecoverPassword}
                 >
                   <p>Aceptar</p>

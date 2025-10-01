@@ -11,7 +11,7 @@ const Container: React.FC<ContainerProps> = ({
   ...rest
 }) => {
   return (
-    <div className={`bg-card-bg rounded-sm shadow-lg ${className}`} {...rest}>
+    <div className={`bg-card-bg rounded-sm shadow-sm ${className}`} {...rest}>
       {children}
     </div>
   );

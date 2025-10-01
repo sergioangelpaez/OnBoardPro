@@ -83,7 +83,6 @@ const SideMenu = () => {
   const toggleMenu = () => setCollapsed(!collapsed);
   const toggleFloating = () => setFloatingOpen(!floatingOpen);
 
-  // Cierra el menú flotante cuando cambia la ruta
   useEffect(() => {
     setFloatingOpen(false);
   }, [pathname]);
@@ -112,7 +111,7 @@ const SideMenu = () => {
               collapsed ? null : "w-full"
             } rounded-lg transition-colors ${
               isActive
-                ? "bg-white/30 text-white font-semibold"
+                ? "bg-accent text-white font-semibold"
                 : "hover:bg-white/30 hover:text-white"
             }`}
           >
@@ -128,7 +127,7 @@ const SideMenu = () => {
       {/* Menú escritorio */}
       <aside
         id="side-menu"
-        className={`hidden md:flex relative flex-col justify-between h-full transition-all duration-300 text-text-secondary ${
+        className={`hidden md:flex relative flex-col justify-between h-full transition-all duration-300 text-white/80 ${
           collapsed ? "w-16" : "w-64"
         }`}
         aria-label="Menú lateral de navegación"
@@ -152,15 +151,15 @@ const SideMenu = () => {
         </button>
 
         <div>
-          <div className="flex items-center justify-center mb-4 h-1/2">
-            {!collapsed && (
-              <h1
-                className="text-2xl font-bold truncate"
-                aria-label="Onboard Pro"
-              >
-                Onboard Pro
-              </h1>
-            )}
+          <div className="flex items-center justify-center mb-4 h-[100px]">
+            <h1
+              className={`text-2xl font-bold truncate ${
+                collapsed ? "pl-4" : null
+              }`}
+              aria-label="Onboard Pro"
+            >
+              {collapsed ? "OP" : "Onboard Pro"}
+            </h1>
           </div>
           <nav
             className="flex flex-col gap-3"
