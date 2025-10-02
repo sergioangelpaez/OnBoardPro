@@ -23,7 +23,7 @@ const Login = () => {
       style={{ backgroundImage: "url('/ucentralbg.jpg')" }}
     >
       <div className="absolute inset-0 bg-black/80 z-0"></div>
-      <div className="flex items-center h-full z-10 p-10">
+      <div className="flex items-center h-full z-10 p-5 md:p-10">
         <Container className="relative p-8 w-full sm:w-[350px] ">
           <div className="border-border border-b-1 pb-5">
             <span className="text-text-secondary">Ingresa a</span>
