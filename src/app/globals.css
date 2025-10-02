@@ -37,6 +37,10 @@
     var(--color-brand-hover),
     var(--color-brand-active)
   );
+
+  /* === Fonts === */
+  --font-heading: var(--font-inter), ui-sans-serif, system-ui;
+  --font-sans: var(--font-poppins), ui-sans-serif, system-ui;
 }
 
 @layer base {
@@ -64,7 +68,6 @@
     --color-warning: #facc15;
     --color-error: #f87171;
 
-    /* === Brand gradient dark === */
     --gradient-brand: linear-gradient(
       135deg,
       var(--color-brand),
@@ -72,4 +75,19 @@
       var(--color-brand-active)
     );
   }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scaleY(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out forwards;
 }

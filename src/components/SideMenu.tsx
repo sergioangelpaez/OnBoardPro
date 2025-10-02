@@ -124,7 +124,6 @@ const SideMenu = () => {
 
   return (
     <>
-      {/* Menú escritorio */}
       <aside
         id="side-menu"
         className={`hidden md:flex relative flex-col justify-between h-full transition-all duration-300 text-white/80 ${
@@ -177,7 +176,6 @@ const SideMenu = () => {
         </nav>
       </aside>
 
-      {/* Botón móvil */}
       <div className="md:hidden fixed bottom-6 right-6 z-50">
         <button
           onClick={toggleFloating}
@@ -196,7 +194,6 @@ const SideMenu = () => {
         </button>
       </div>
 
-      {/* Overlay + Menú flotante con fade */}
       <div
         className={`fixed inset-0 bg-black/60 backdrop-blur-sm z-40 transition-opacity duration-300 ${
           floatingOpen ? "opacity-100" : "opacity-0 pointer-events-none"

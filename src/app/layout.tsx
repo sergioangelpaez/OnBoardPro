@@ -1,18 +1,25 @@
-import type { Metadata } from "next";
 import "./globals.css";
+import { Inter, Poppins } from "next/font/google";
 
-export const metadata: Metadata = {
-  title: "Onboard Pro",
-};
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+});
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
+  variable: "--font-poppins",
+});
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="es">
-      <body className="antialiased">{children}</body>
+    <html lang="es" className={`${inter.variable} ${poppins.variable}`}>
+      <body className="font-heading">{children}</body>
     </html>
   );
 }

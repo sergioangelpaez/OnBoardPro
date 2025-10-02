@@ -6,17 +6,34 @@ import {
   BeakerIcon,
   BookOpenIcon,
   ChevronDownIcon,
+  ChevronUpIcon,
 } from "@heroicons/react/24/solid";
 import { ProgressBar } from "./ProgressBar";
+import { useState, useEffect } from "react";
 
 interface UserBannerProps {
   user: User;
 }
 
 const UserBanner: React.FC<UserBannerProps> = ({ user }) => {
+  const [isStatsOpen, setIsStatsOpen] = useState(false);
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        setIsStatsOpen(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    handleResize();
+
+    return () => window.removeEventListener("resize", handleResize);
+  });
+
   if (!user) return <div>No hay usuario</div>;
   return (
-    <Container className="rounded-xl p-3 grid grid-cols-1 md:grid-cols-2 gap-3 grid-rows-[1fr_auto] md:grid-rows-1">
+    <Container className="p-3 grid grid-cols-1 md:grid-cols-2 md:gap-3 grid-rows-[1fr_auto] md:grid-rows-1 h-fit">
       <div className="grid grid-cols-[auto_1fr] gap-5 col-start-1 col-end-3 md:col-start-1 md:col-end-2">
         <div className="flex col-start-1">
           <img
@@ -27,14 +44,14 @@ const UserBanner: React.FC<UserBannerProps> = ({ user }) => {
         </div>
         <div className="flex flex-col justify-center gap-2 col-start-2">
           <div>
-            <p className="text-lg text-text-secondary">Hola,</p>
+            <p className="text-lg text-text-secondary font-sans">Hola,</p>
             <p className="text-3xl text-brand font-semibold truncate leading-tight">
               {user.name}
             </p>
           </div>
           <Divider />
           <div className="flex gap-3 items-center">
-            <p className="truncate text-text-secondary text-sm">
+            <p className="truncate text-text-secondary text-sm font-sans">
               Nivel {user.level}
             </p>
             <div className="flex-1">
@@ -44,14 +61,36 @@ const UserBanner: React.FC<UserBannerProps> = ({ user }) => {
         </div>
       </div>
 
-      <div className="flex items-center flex-col mt-3">
-        <div className="flex items-center justify-center gap-1">
-          <p className="text-brand text-sm font-semibold">Ver estadísticas</p>
-          <ChevronDownIcon className="size-4 text-brand" />
-        </div>
+      <div className="flex items-center flex-col mt-5">
+        <button
+          className="flex items-center justify-center gap-1 md:hidden"
+          onClick={() => setIsStatsOpen((prev) => !prev)}
+        >
+          {isStatsOpen ? (
+            <>
+              <p className="text-brand text-sm font-semibold">
+                Ocultar estadísticas
+              </p>
+              <ChevronUpIcon className="size-4 text-brand" />
+            </>
+          ) : (
+            <>
+              <p className="text-brand text-sm font-semibold">
+                Ver estadísticas
+              </p>
+              <ChevronDownIcon className="size-4 text-brand" />
+            </>
+          )}
+        </button>
 
-        <div className="w-full hidden">
-          <Divider />
+        <div
+          className={`w-full ${
+            isStatsOpen ? "grid" : "hidden"
+          } md:grid flex flex-col gap-3 mt-3 transition-all duration-300 ease-in-out 
+                overflow-hidden opacity-0 scale-y-95 animate-fadeIn`}
+        >
+          {isStatsOpen && <Divider />}
+
           <div className="md:grid grid-cols-3 grid">
             <div className="flex justify-center items-center flex-col col-start-1">
               <div className="flex justify-center items-end">
@@ -60,7 +99,9 @@ const UserBanner: React.FC<UserBannerProps> = ({ user }) => {
                 </p>
               </div>
               <div>
-                <p className="text-text-secondary text-center">Promedio</p>
+                <p className="text-text-secondary text-center font-sans">
+                  Promedio
+                </p>
               </div>
             </div>
 
@@ -71,7 +112,9 @@ const UserBanner: React.FC<UserBannerProps> = ({ user }) => {
                 </p>
               </div>
               <div>
-                <p className="text-text-secondary text-center">Misiones</p>
+                <p className="text-text-secondary text-center font-sans">
+                  Misiones
+                </p>
               </div>
             </div>
 
@@ -82,7 +125,9 @@ const UserBanner: React.FC<UserBannerProps> = ({ user }) => {
                 </p>
               </div>
               <div>
-                <p className="text-text-secondary text-center">Días de racha</p>
+                <p className="text-text-secondary text-center font-sans">
+                  Días de racha
+                </p>
               </div>
             </div>
           </div>
