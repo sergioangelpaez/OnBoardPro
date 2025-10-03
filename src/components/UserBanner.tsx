@@ -1,15 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Container from "./Container";
 import { User } from "@/types/user";
 import Divider from "./Divider";
-import {
-  BeakerIcon,
-  BookOpenIcon,
-  ChevronDownIcon,
-  ChevronUpIcon,
-} from "@heroicons/react/24/solid";
+import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/solid";
 import { ProgressBar } from "./ProgressBar";
-import { useState, useEffect } from "react";
 
 interface UserBannerProps {
   user: User;
@@ -17,37 +11,43 @@ interface UserBannerProps {
 
 const UserBanner: React.FC<UserBannerProps> = ({ user }) => {
   const [isStatsOpen, setIsStatsOpen] = useState(false);
+
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 768) {
         setIsStatsOpen(false);
       }
     };
-
     window.addEventListener("resize", handleResize);
-
     handleResize();
-
     return () => window.removeEventListener("resize", handleResize);
   });
 
   if (!user) return <div>No hay usuario</div>;
+
   return (
-    <Container className="p-3 grid grid-cols-1 md:grid-cols-2 md:gap-3 grid-rows-[1fr_auto] md:grid-rows-1 h-fit">
-      <div className="grid grid-cols-[auto_1fr] gap-5 col-start-1 col-end-3 md:col-start-1 md:col-end-2">
-        <div className="flex col-start-1">
+    <Container
+      aria-labelledby="user-banner-title"
+      className="p-3 grid grid-cols-1 md:grid-cols-2 md:gap-3 grid-rows-[1fr_auto] md:grid-rows-1 h-fit"
+    >
+      {/* Avatar + User Info */}
+      <div className="grid grid-cols-[auto_1fr] gap-5 col-span-2 md:col-span-1">
+        <div className="flex">
           <img
             src={user.avatar || "/hornet.jpg"}
-            alt=""
+            alt={`Avatar de ${user.name}`}
             className="w-25 h-25 min-w-25 min-h-25 rounded-full"
           />
         </div>
-        <div className="flex flex-col justify-center gap-2 col-start-2">
+        <div className="flex flex-col justify-center gap-2">
           <div>
             <p className="text-lg text-text-secondary font-sans">Hola,</p>
-            <p className="text-3xl text-brand font-semibold truncate leading-tight">
+            <h2
+              id="user-banner-title"
+              className="text-brand truncate leading-tight"
+            >
               {user.name}
-            </p>
+            </h2>
           </div>
           <Divider />
           <div className="flex gap-3 items-center">
@@ -61,29 +61,33 @@ const UserBanner: React.FC<UserBannerProps> = ({ user }) => {
         </div>
       </div>
 
-      <div className="flex items-center flex-col mt-5">
+      {/* Stats Section */}
+      <aside className="flex items-center flex-col mt-5">
         <button
           className="flex items-center justify-center gap-1 md:hidden"
           onClick={() => setIsStatsOpen((prev) => !prev)}
+          aria-expanded={isStatsOpen}
+          aria-controls="user-stats"
         >
           {isStatsOpen ? (
             <>
-              <p className="text-brand text-sm font-semibold">
+              <span className="text-brand text-sm font-semibold">
                 Ocultar estadísticas
-              </p>
+              </span>
               <ChevronUpIcon className="size-4 text-brand" />
             </>
           ) : (
             <>
-              <p className="text-brand text-sm font-semibold">
+              <span className="text-brand text-sm font-semibold">
                 Ver estadísticas
-              </p>
+              </span>
               <ChevronDownIcon className="size-4 text-brand" />
             </>
           )}
         </button>
 
         <div
+          id="user-stats"
           className={`w-full ${
             isStatsOpen ? "grid" : "hidden"
           } md:grid flex flex-col gap-3 mt-3 transition-all duration-300 ease-in-out 
@@ -91,48 +95,33 @@ const UserBanner: React.FC<UserBannerProps> = ({ user }) => {
         >
           {isStatsOpen && <Divider />}
 
-          <div className="md:grid grid-cols-3 grid">
-            <div className="flex justify-center items-center flex-col col-start-1">
-              <div className="flex justify-center items-end">
-                <p className="text-brand text-3xl text-center font-semibold">
-                  4.5
-                </p>
-              </div>
-              <div>
-                <p className="text-text-secondary text-center font-sans">
-                  Promedio
-                </p>
-              </div>
-            </div>
-
-            <div className="flex justify-center items-center flex-col col-start-2">
-              <div className="flex justify-center items-end">
-                <p className="text-brand text-3xl text-center font-semibold">
-                  3/7
-                </p>
-              </div>
-              <div>
-                <p className="text-text-secondary text-center font-sans">
-                  Misiones
-                </p>
-              </div>
-            </div>
-
+          <div className="grid md:grid-cols-3">
+            {/* Promedio */}
             <div className="flex justify-center items-center flex-col">
-              <div className="flex justify-center items-end">
-                <p className="text-brand text-3xl text-center font-semibold">
-                  120
-                </p>
-              </div>
-              <div>
-                <p className="text-text-secondary text-center font-sans">
-                  Días de racha
-                </p>
-              </div>
+              <h3 className="text-brand text-center font-semibold">4.5</h3>
+              <p className="text-text-secondary text-center font-sans">
+                Promedio
+              </p>
+            </div>
+
+            {/* Misiones */}
+            <div className="flex justify-center items-center flex-col">
+              <h3 className="text-brand text-center font-semibold">3/7</h3>
+              <p className="text-text-secondary text-center font-sans">
+                Misiones
+              </p>
+            </div>
+
+            {/* Días de racha */}
+            <div className="flex justify-center items-center flex-col">
+              <h3 className="text-brand text-center font-semibold">120</h3>
+              <p className="text-text-secondary text-center font-sans">
+                Días de racha
+              </p>
             </div>
           </div>
         </div>
-      </div>
+      </aside>
     </Container>
   );
 };

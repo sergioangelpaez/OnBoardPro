@@ -4,12 +4,12 @@ import SideMenu from "@/components/SideMenu";
 const DashboardLayout = ({ children }: { children: ReactNode }) => {
   return (
     <div className="min-h-screen bg-gradient-to-r flex items-center justify-center from-brand to-blue-800">
-      <div className="grid min-h-screen grid-cols-[auto_1fr] w-full max-w-app">
-        <div className="col-start-1 py-3">
+      <div className="grid min-h-screen grid-cols-[auto_1fr] w-full max-w-app py-3">
+        <div>
           <SideMenu />
         </div>
-        <div className="col-start-2 p-3">
-          <main className="bg-bg-main rounded-3xl h-full overflow-hidden p-3">
+        <div className="col-start-2 p-0 md:p-3">
+          <main className="md:bg-bg-main md:rounded-3xl md:from-brand md:to-blue-800 md:bg-gradient-to-r h-full overflow-hidden p-2">
             {children}
           </main>
         </div>

@@ -75,6 +75,55 @@
       var(--color-brand-active)
     );
   }
+
+  /* === Typography Hierarchy === */
+  h1 {
+    font-family: var(--font-heading);
+    font-size: 2.25rem; /* 36px */
+    line-height: 2.5rem; /* 40px */
+    font-weight: 700;
+    color: var(--color-text-main);
+  }
+
+  h2 {
+    font-family: var(--font-heading);
+    font-size: 1.875rem; /* 30px */
+    line-height: 2.25rem; /* 36px */
+    font-weight: 600;
+    color: var(--color-text-main);
+  }
+
+  h3 {
+    font-family: var(--font-heading);
+    font-size: 1.5rem; /* 24px */
+    line-height: 2rem; /* 32px */
+    font-weight: 600;
+    color: var(--color-text-main);
+  }
+
+  h4 {
+    font-family: var(--font-heading);
+    font-size: 1.25rem; /* 20px */
+    line-height: 1.75rem; /* 28px */
+    font-weight: 500;
+    color: var(--color-text-main);
+  }
+
+  h5 {
+    font-family: var(--font-heading);
+    font-size: 1.125rem; /* 18px */
+    line-height: 1.5rem; /* 24px */
+    font-weight: 500;
+    color: var(--color-text-main);
+  }
+
+  h6 {
+    font-family: var(--font-heading);
+    font-size: 1rem; /* 16px */
+    line-height: 1.5rem; /* 24px */
+    font-weight: 500;
+    color: var(--color-text-secondary);
+  }
 }
 
 @keyframes fadeIn {
