@@ -9,7 +9,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
           <SideMenu />
         </div>
         <div className="col-start-2 p-0 md:p-3">
-          <main className="md:bg-bg-main md:rounded-3xl md:from-brand md:to-blue-800 md:bg-gradient-to-r h-full overflow-hidden p-2">
+          <main className="md:bg-bg-main md:rounded-3xl from-brand to-blue-800  h-full overflow-hidden p-2">
             {children}
           </main>
         </div>

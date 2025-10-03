@@ -95,7 +95,7 @@ const UserBanner: React.FC<UserBannerProps> = ({ user }) => {
         >
           {isStatsOpen && <Divider />}
 
-          <div className="grid md:grid-cols-3">
+          <div className="grid grid-cols-3">
             {/* Promedio */}
             <div className="flex justify-center items-center flex-col">
               <h3 className="text-brand text-center font-semibold">4.5</h3>

@@ -152,7 +152,7 @@ const SideMenu = () => {
         <div>
           <div className="flex items-center justify-center mb-4 h-[100px]">
             <h1
-              className={`text-2xl font-bold truncate ${
+              className={`text-2xl text-white font-bold truncate ${
                 collapsed ? "pl-4" : null
               }`}
               aria-label="Onboard Pro"
