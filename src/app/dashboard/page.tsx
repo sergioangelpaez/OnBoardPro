@@ -1,9 +1,9 @@
 "use client";
 
-import Container from "@/components/Container";
-import UserBanner from "@/components/UserBanner";
 import useUserStore from "@/stores/UserStore";
-import CourseCard from "@/components/CourseCard";
+import AllCourses from "./components/AllCourses";
+import RecentCourses from "./components/RecentCourses";
+import UserBanner from "./components/UserBanner";
 
 const Dashboard = () => {
   const user = useUserStore((s) => s.user);
@@ -21,29 +21,14 @@ const Dashboard = () => {
   return (
     <main className="w-full h-full grid grid-cols-1 lg:grid-cols-[1fr_0.4fr]">
       <div className="flex flex-col gap-3">
-        {/* User Section */}
-        <section aria-labelledby="user-info">
-          <h1 id="user-info" className="sr-only">
-            Información del usuario
-          </h1>
-          <UserBanner user={user} />
-        </section>
+        {/* User Banner */}
+        <UserBanner user={user} />
 
         {/* Recent Courses Section */}
-        <section aria-labelledby="recent-courses">
-          <Container className="p-3">
-            <h2
-              id="recent-courses"
-              className="font-semibold text-lg text-brand font-heading mb-3"
-            >
-              Tus cursos recientes
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-              <CourseCard />
-              <CourseCard />
-            </div>
-          </Container>
-        </section>
+        <RecentCourses />
+
+        {/** All Courses Section */}
+        <AllCourses />
       </div>
     </main>
   );

@@ -8,7 +8,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
         <div>
           <SideMenu />
         </div>
-        <div className="col-start-2 p-0 md:p-3">
+        <div className="col-start-2 p-0 md:px-2">
           <main className="md:bg-bg-main md:rounded-3xl from-brand to-blue-800  h-full overflow-hidden p-2">
             {children}
           </main>

@@ -141,11 +141,11 @@ const SideMenu = () => {
         >
           {collapsed ? (
             <ChevronRightIcon
-              className="size-7 text-white"
+              className="size-5 text-white"
               aria-hidden="true"
             />
           ) : (
-            <ChevronLeftIcon className="size-7 text-white" aria-hidden="true" />
+            <ChevronLeftIcon className="size-5 text-white" aria-hidden="true" />
           )}
         </button>
 
