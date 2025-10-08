@@ -10,7 +10,7 @@ interface CourseCardProps {
 const CourseCard: React.FC<CourseCardProps> = ({ className }) => {
   return (
     <article
-      className={`border border-border/50 shadow-md hover:shadow-lg transition rounded-lg p-4 grid grid-rows-[1fr_auto] gap-5 ${className}`}
+      className={`border border-border/50 hover:shadow-md transition rounded-lg p-4 grid grid-rows-[1fr_auto] gap-3 ${className}`}
     >
       {/* Header */}
       <header className="grid grid-cols-[1fr_auto] gap-3">
@@ -18,7 +18,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ className }) => {
           <img
             src="/reactbanner.jpg"
             alt="Banner del curso React"
-            className="object-cover rounded-lg w-20 h-20"
+            className="object-cover rounded-lg w-15 h-15"
           />
           <h3 className="text-brand line-clamp-2 font-semibold">
             Course Title Name

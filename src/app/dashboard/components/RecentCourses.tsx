@@ -29,10 +29,7 @@ const RecentCourses = () => {
         <div className="grid grid-cols-1 grid-rows-3 md:grid-rows-1 md:grid-cols-3 gap-3">
           <CourseCard />
           <CourseCard />
-          <div className="flex flex-col cursor-pointer hover:bg-brand/5 items-center justify-center border-1 text-text-secondary border-dashed border-border rounded-lg">
-            <p>Add a new course</p>
-            <p>+</p>
-          </div>
+          <CourseCard />
         </div>
       </Container>
     </section>

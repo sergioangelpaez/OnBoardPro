@@ -37,7 +37,7 @@ const UserBanner: React.FC<UserBannerProps> = ({ user }) => {
       >
         {/* Avatar + User Info */}
         <div className="grid grid-cols-[auto_1fr] gap-5 col-span-2 md:col-span-1">
-          <div className="flex">
+          <div>
             <img
               src={user.avatar || "/hornet.jpg"}
               alt={`Avatar de ${user.name}`}

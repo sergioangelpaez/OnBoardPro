@@ -26,7 +26,7 @@ const Button: React.FC<ButtonProps> = ({
   return (
     <button
       disabled={isDisabled}
-      className={`rounded-sm cursor-pointer p-1 ${
+      className={`rounded-sm cursor-pointer py-1 px-2 ${
         buttonVariants[variant] ?? buttonVariants.primary
       } ${className}`}
       {...rest}

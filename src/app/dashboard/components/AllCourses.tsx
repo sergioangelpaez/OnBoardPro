@@ -22,12 +22,13 @@ const AllCourses = () => {
   return (
     <section aria-labelledby="current-courses">
       <Container className="p-3">
+        {/** Header */}
         <div className="flex justify-between items-center mb-3">
           <h2
             id="recent-courses"
             className="font-semibold text-lg text-brand font-heading"
           >
-            Tus cursos recientes
+            Todos tus cursos
           </h2>
           <div className="flex gap-3 items-center">
             <div className="relative">
@@ -69,7 +70,11 @@ const AllCourses = () => {
             </Button>
           </div>
         </div>
-        <CourseRow />
+        <div className="flex flex-col gap-3">
+          <CourseRow />
+          <CourseRow />
+          <CourseRow />
+        </div>
       </Container>
     </section>
   );
