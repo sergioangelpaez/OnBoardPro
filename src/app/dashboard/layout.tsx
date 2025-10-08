@@ -3,7 +3,7 @@ import SideMenu from "@/components/SideMenu";
 
 const DashboardLayout = ({ children }: { children: ReactNode }) => {
   return (
-    <div className="min-h-screen bg-gradient-to-r flex items-center justify-center from-brand to-blue-800">
+    <div className="min-h-screen bg-gradient-to-r flex items-center justify-center from-brand/70 to-blue-800/70 md:from-brand md:to-blue-800">
       <div className="grid min-h-screen grid-cols-[auto_1fr] w-full max-w-app py-3">
         <div>
           <SideMenu />

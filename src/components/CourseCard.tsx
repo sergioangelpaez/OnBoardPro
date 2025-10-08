@@ -10,7 +10,7 @@ interface CourseCardProps {
 const CourseCard: React.FC<CourseCardProps> = ({ className }) => {
   return (
     <article
-      className={`bg-brand/5 border border-border/50 shadow-md hover:shadow-lg transition rounded-lg p-4 grid grid-rows-[1fr_auto] gap-5 ${className}`}
+      className={`border border-border/50 shadow-md hover:shadow-lg transition rounded-lg p-4 grid grid-rows-[1fr_auto] gap-5 ${className}`}
     >
       {/* Header */}
       <header className="grid grid-cols-[1fr_auto] gap-3">

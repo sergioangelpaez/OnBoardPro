@@ -177,7 +177,7 @@ const SideMenu = () => {
       </aside>
 
       <div className="md:hidden fixed bottom-6 right-6 z-50">
-        <button
+        {/**        <button
           onClick={toggleFloating}
           aria-label={
             floatingOpen ? "Cerrar menú flotante" : "Abrir menú flotante"
@@ -191,7 +191,7 @@ const SideMenu = () => {
           ) : (
             <Bars3Icon className="size-7" />
           )}
-        </button>
+        </button> */}
       </div>
 
       <div
