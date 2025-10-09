@@ -26,7 +26,7 @@ const AllCourses = () => {
         <div className="flex justify-between items-center mb-3">
           <h2
             id="recent-courses"
-            className="font-semibold text-lg text-brand font-heading"
+            className="font-semibold text-lg text-brand font-heading truncate"
           >
             Todos tus cursos
           </h2>
@@ -37,7 +37,7 @@ const AllCourses = () => {
                 className={`py-1 px-2 rounded-lg flex gap-2 items-center cursor-pointer ${
                   activeFilter == "Todos"
                     ? "bg-bg-main hover:bg-border/50 active:bg-border/80"
-                    : "bg-brand hover:bg-brand-hover active:bg-brand-active text-white"
+                    : "bg-accent hover:bg-accent-hover active:bg-accent-active text-white"
                 }`}
               >
                 <p className="text-sm">{activeFilter}</p>

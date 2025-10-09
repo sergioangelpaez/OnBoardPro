@@ -20,9 +20,6 @@ const CourseCard: React.FC<CourseCardProps> = ({ className }) => {
             alt="Banner del curso React"
             className="object-cover rounded-lg w-15 h-15"
           />
-          <h3 className="text-brand line-clamp-2 font-semibold">
-            Course Title Name
-          </h3>
         </div>
 
         <div className="flex flex-col items-end">
@@ -31,6 +28,10 @@ const CourseCard: React.FC<CourseCardProps> = ({ className }) => {
           </p>
         </div>
       </header>
+
+      <h3 className="text-brand line-clamp-2 font-semibold">
+        Course Title Name
+      </h3>
 
       {/* Participants & Progress */}
       <section

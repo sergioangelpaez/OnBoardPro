@@ -21,7 +21,7 @@ const CourseRow: React.FC<CourseRowProps> = ({ className }) => {
             title="Instructor Name"
           />
         </div>
-        <div className="flex flex-col justify-between">
+        <div className="flex flex-col justify-between min-w-0">
           <p className="text-lg text-brand font-semibold truncate">
             UI/UX Design Crash Course
           </p>
