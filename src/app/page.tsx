@@ -47,7 +47,7 @@ const Login = () => {
                 type="submit"
                 loading={false}
                 variant="primary"
-                className="p-2"
+                className="py-2"
               >
                 <span>Ingresar</span>
               </Button>

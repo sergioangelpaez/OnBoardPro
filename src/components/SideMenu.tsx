@@ -137,7 +137,7 @@ const SideMenu = () => {
           aria-expanded={!collapsed}
           aria-controls="side-menu"
           title={collapsed ? "Abrir menú lateral" : "Cerrar menú lateral"}
-          className="absolute cursor-pointer -right-5 top-1/2 -translate-y-1/2 bg-brand text-white p-2 rounded-full transition"
+          className="absolute cursor-pointer -right-8 top-1/2 -translate-y-1/2 bg-brand text-white p-2 rounded-full transition"
         >
           {collapsed ? (
             <ChevronRightIcon
@@ -152,9 +152,7 @@ const SideMenu = () => {
         <div>
           <div className="flex items-center justify-center mb-4 h-[100px]">
             <h1
-              className={`text-2xl text-white font-bold truncate ${
-                collapsed ? "pl-4" : null
-              }`}
+              className={`text-2xl text-white font-bold truncate pl-4`}
               aria-label="Onboard Pro"
             >
               {collapsed ? "OP" : "Onboard Pro"}
@@ -178,20 +176,20 @@ const SideMenu = () => {
 
       <div className="md:hidden fixed bottom-6 right-6 z-50">
         {/**        <button
-          onClick={toggleFloating}
-          aria-label={
-            floatingOpen ? "Cerrar menú flotante" : "Abrir menú flotante"
-          }
-          aria-expanded={floatingOpen}
-          aria-controls="floating-menu"
-          className="bg-brand text-white p-3 rounded-full shadow-lg transition"
-        >
-          {floatingOpen ? (
-            <XMarkIcon className="size-7" />
-          ) : (
-            <Bars3Icon className="size-7" />
-          )}
-        </button> */}
+            onClick={toggleFloating}
+            aria-label={
+              floatingOpen ? "Cerrar menú flotante" : "Abrir menú flotante"
+            }
+            aria-expanded={floatingOpen}
+            aria-controls="floating-menu"
+            className="bg-brand text-white p-3 rounded-full shadow-lg transition"
+          >
+            {floatingOpen ? (
+              <XMarkIcon className="size-7" />
+            ) : (
+              <Bars3Icon className="size-7" />
+            )}
+          </button> */}
       </div>
 
       <div

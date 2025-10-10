@@ -60,7 +60,7 @@ const UserBanner: React.FC<UserBannerProps> = ({ user }) => {
                 Nivel {user.level}
               </p>
               <div className="flex-1">
-                <ProgressBar progress={20} requiredXp={120} />
+                <ProgressBar progress={50} requiredXp={120} />
               </div>
             </div>
           </div>

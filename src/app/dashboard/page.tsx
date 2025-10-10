@@ -5,7 +5,6 @@ import AllCourses from "./components/AllCourses";
 import RecentCourses from "./components/RecentCourses";
 import UserBanner from "./components/UserBanner";
 import UpcomingSubmissions from "./components/UpcomingSubmissions";
-import UserProfileCard from "@/components/UserProfileCard";
 import ClasificationTable from "@/components/ClasificationTable";
 import { useRouter } from "next/navigation";
 
@@ -41,7 +40,6 @@ const Dashboard = () => {
             </div>
           </div>
           <div>
-            <UserProfileCard user={user} />
             <ClasificationTable />
           </div>
         </main>
