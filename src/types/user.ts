@@ -17,10 +17,4 @@ export interface User {
   avatar?: string;
   xp: number;
   level: number;
-  preferences?: {
-    theme: "light" | "dark";
-    language: string;
-  };
-  enrolledCourses?: CourseProgress[];
-  leaderboard?: LeaderboardInfo;
 }

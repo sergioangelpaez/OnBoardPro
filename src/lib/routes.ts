@@ -34,16 +34,15 @@ export type NavRoute = {
 
 export const routesByRole: Partial<Record<Role, NavRoute[]>> = {
   student: [
-    { href: "/dashboard", label: "Dashboard", solid: SquaresSolid, outline: SquaresOutline },
-    { href: "/dashboard/courses", label: "Cursos", solid: BookSolid, outline: BookOutline },
-    { href: "/dashboard/submissions", label: "Misiones", solid: FolderSolid, outline: FolderOutline },
-    { href: "/dashboard/leaderboard", label: "Clasificación", solid: TrophySolid, outline: TrophyOutline },
-    { href: "/dashboard/calendar", label: "Calendario", solid: CalendarSolid, outline: CalendarOutline },
+    { href: "/app/dashboard", label: "Dashboard", solid: SquaresSolid, outline: SquaresOutline },
+    { href: "/app/dashboard/courses", label: "Cursos", solid: BookSolid, outline: BookOutline },
+    { href: "/app/dashboard/submissions", label: "Misiones", solid: FolderSolid, outline: FolderOutline },
+    { href: "/app/dashboard/leaderboard", label: "Clasificación", solid: TrophySolid, outline: TrophyOutline },
+    { href: "/app/dashboard/calendar", label: "Calendario", solid: CalendarSolid, outline: CalendarOutline },
   ],
   admin: [
-    { href: "/dashboard", label: "Dashboard", solid: SquaresSolid, outline: SquaresOutline },
-    { href: "/users", label: "Usuarios", solid: UsersSolid, outline: UsersOutline },
-    { href: "/reports", label: "Reportes", solid: DocumentSolid, outline: DocumentOutline },
+    { href: "/app/dashboard", label: "Dashboard", solid: SquaresSolid, outline: SquaresOutline },
+    { href: "/app/users", label: "Usuarios", solid: UsersSolid, outline: UsersOutline },
   ],
 };
 

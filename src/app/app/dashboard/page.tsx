@@ -1,10 +1,10 @@
 "use client";
 
 import useUserStore from "@/stores/UserStore";
-import AllCourses from "./components/AllCourses";
-import RecentCourses from "./components/RecentCourses";
-import UserBanner from "./components/UserBanner";
-import UpcomingSubmissions from "./components/UpcomingSubmissions";
+import AllCourses from "../components/AllCourses";
+import RecentCourses from "../components/RecentCourses";
+import UserBanner from "../components/UserBanner";
+import UpcomingSubmissions from "../components/UpcomingSubmissions";
 import ClasificationTable from "@/components/ClasificationTable";
 import { useRouter } from "next/navigation";
 
@@ -25,7 +25,7 @@ const Dashboard = () => {
   switch (user.role) {
     case "student":
       return (
-        <main className="w-full h-full grid grid-cols-1 lg:grid-cols-[1fr_0.4fr] gap-3">
+        <main className="w-full h-full grid grid-cols-1 lg:grid-cols-[1fr_0.4fr] gap-3 p-3">
           <div className="flex flex-col gap-3">
             {/* User Banner */}
             <UserBanner user={user} />
@@ -45,7 +45,11 @@ const Dashboard = () => {
         </main>
       );
     case "admin":
-      return <p>Hola, {user.role}</p>;
+      return (
+        <main className="p-3">
+          <h1>Hola, admin</h1>
+        </main>
+      );
     case "teacher":
       return <p>Hola, {user.role}</p>;
     default:
