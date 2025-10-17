@@ -39,7 +39,7 @@ export default function Login() {
       <div className="absolute inset-0 bg-black/80 z-0" />
 
       {/* Card principal */}
-      <Card className="relative z-10 w-full backdrop-blur-lg bg-card shadow-xl">
+      <Card className="relative z-10 w-full backdrop-blur-lg bg-card shadow-xl md:max-w-fit">
         <CardHeader>
           <span className="text-muted-foreground text-sm">Ingresa a</span>
           <CardTitle className="text-primary text-4xl font-bold">
