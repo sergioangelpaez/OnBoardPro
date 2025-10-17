@@ -1,29 +1,33 @@
 "use client";
 
 import React, { ReactNode } from "react";
-import { Card } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import useUserStore from "@/stores/UserStore";
 import SideMenu from "@/components/SideMenu";
+
+const HEADER_HEIGHT = 56; // matches the mobile navbar height (py-3 + text size)
 
 const DashboardLayout = ({ children }: { children: ReactNode }) => {
   const user = useUserStore((s) => s.user);
   const userRole = user?.role || "student";
 
   return (
-    <div className="min-h-dvh w-full h-screen flex bg-primary">
-      <div className="grid w-full h-full grid-cols-[auto_1fr] gap-3 p-3">
-        {/* Sidebar */}
-        <SideMenu role={userRole} />
+    <div className="min-h-dvh w-full flex bg-primary">
+      {/* === Sidebar / Drawer (handles both mobile + desktop) === */}
+      <SideMenu role={userRole} />
 
-        {/* Main content */}
-        <div className="col-start-2 flex-1 rounded-2xl overflow-hidden">
-          <ScrollArea className="h-screen w-full">
-            <main className="bg-background text-foreground rounded-2xl h-screen">
-              {children}
-            </main>
-          </ScrollArea>
-        </div>
+      {/* === Main Content === */}
+      <div className="flex-1 flex flex-col bg-background text-foreground md:rounded-2xl md:m-3 overflow-hidden">
+        <ScrollArea className="flex-1 w-full">
+          <main
+            className="
+    min-h-dvh
+    pt-[calc(56px+1rem)] md:pt-0
+  "
+          >
+            {children}
+          </main>
+        </ScrollArea>
       </div>
     </div>
   );

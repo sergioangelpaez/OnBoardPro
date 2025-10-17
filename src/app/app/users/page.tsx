@@ -160,11 +160,11 @@ export default function UsersPage() {
   }
 
   return (
-    <div className="p-6">
+    <div className="p-6 overflow-y-auto h-full">
       <h1 className="text-3xl font-bold mb-2 text-brand">
         Gestión de usuarios
       </h1>
-      <p className="text-gray-600 mb-6">
+      <p className="text-gray-600">
         Aquí puedes crear, editar o eliminar usuarios del sistema.
       </p>
       <DataTable columns={columns} data={data} />
