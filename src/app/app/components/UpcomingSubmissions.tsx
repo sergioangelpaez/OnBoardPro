@@ -6,9 +6,7 @@ interface UpcomingSubmissionsProps {
   className?: string;
 }
 
-const UpcomingSubmissions: React.FC<UpcomingSubmissionsProps> = ({
-  className,
-}) => {
+const UpcomingSubmissions: React.FC<UpcomingSubmissionsProps> = ({}) => {
   return (
     <section aria-labelledby="current-courses">
       <Container className="p-3">

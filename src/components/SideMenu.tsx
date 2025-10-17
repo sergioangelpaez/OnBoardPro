@@ -31,7 +31,7 @@ const SideMenu = ({ role = "student" }: SideMenuProps) => {
 
   const menuConfig: Record<
     string,
-    { label: string; icon: any; href: string }[]
+    { label: string; icon: React.ElementType; href: string }[]
   > = {
     admin: [
       { label: "Dashboard", icon: Grid2X2, href: "/app/dashboard" },
