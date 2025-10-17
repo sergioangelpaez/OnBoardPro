@@ -32,14 +32,14 @@ export default function Login() {
 
   return (
     <div
-      className="relative flex items-center px-20 w-full h-[100dvh] bg-cover bg-center text-foreground"
+      className="relative flex items-center md:px-20 px-5 w-full h-[100dvh] bg-cover bg-center text-foreground"
       style={{ backgroundImage: "url('/ucentralbg.jpg')" }}
     >
       {/* Capa oscura */}
       <div className="absolute inset-0 bg-black/80 z-0" />
 
       {/* Card principal */}
-      <Card className="relative z-10 w-full max-w-sm backdrop-blur-lg bg-card shadow-xl">
+      <Card className="relative z-10 w-full backdrop-blur-lg bg-card shadow-xl">
         <CardHeader>
           <span className="text-muted-foreground text-sm">Ingresa a</span>
           <CardTitle className="text-primary text-4xl font-bold">

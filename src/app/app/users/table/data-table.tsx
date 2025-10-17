@@ -31,6 +31,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
+import { Columns } from "lucide-react";
+
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
@@ -69,45 +71,47 @@ export function DataTable<TData, TValue>({
 
   return (
     <div>
-      <div className="flex items-center py-4 space-x-2">
-        <Button
-          variant="default"
-          size="sm"
-          onClick={() => console.log("Agregar usuario")}
-        >
-          Agregar usuario
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => {
-            const selected = table.getFilteredSelectedRowModel().rows;
-            if (selected.length > 0) {
-              console.log("Exportar seleccionados:", selected);
-            } else {
-              console.log("Exportar todos:", table.getRowModel().rows);
-            }
-          }}
-        >
-          {table.getFilteredSelectedRowModel().rows.length > 0
-            ? "Exportar seleccionados"
-            : "Exportar todos"}
-        </Button>
-        {table.getFilteredSelectedRowModel().rows.length > 0 && (
+      <div className="flex items-center py-4 gap-3">
+        <div className="flex items-center py-4 space-x-2">
           <Button
-            variant="destructive"
+            variant="default"
+            size="sm"
+            onClick={() => console.log("Agregar usuario")}
+          >
+            Agregar usuario
+          </Button>
+
+          <Button
+            variant="outline"
             size="sm"
             onClick={() => {
               const selected = table.getFilteredSelectedRowModel().rows;
-              console.log("Borrar filas:", selected);
+              if (selected.length > 0) {
+                console.log("Exportar seleccionados:", selected);
+              } else {
+                console.log("Exportar todos:", table.getRowModel().rows);
+              }
             }}
           >
-            Borrar seleccionados
+            {table.getFilteredSelectedRowModel().rows.length > 0
+              ? "Exportar seleccionados"
+              : "Exportar todos"}
           </Button>
-        )}
-      </div>
 
-      <div className="flex items-center py-4">
+          {table.getFilteredSelectedRowModel().rows.length > 0 && (
+            <Button
+              variant="destructive"
+              size="sm"
+              onClick={() => {
+                const selected = table.getFilteredSelectedRowModel().rows;
+                console.log("Borrar filas:", selected);
+              }}
+            >
+              Borrar seleccionados
+            </Button>
+          )}
+        </div>
+
         <Input
           placeholder="Filter emails..."
           value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
@@ -116,10 +120,12 @@ export function DataTable<TData, TValue>({
           }
           className="max-w-sm"
         />
+
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="ml-auto">
-              Columns
+              <Columns className="w-4 h-4" />
+              Columnas
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
@@ -181,7 +187,7 @@ export function DataTable<TData, TValue>({
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  No results.
+                  No se encontraron resultados para tu búsqueda.
                 </TableCell>
               </TableRow>
             )}
