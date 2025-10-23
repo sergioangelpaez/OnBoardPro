@@ -15,7 +15,7 @@ const useUserStore = create<UserState>((set) => ({
     id: 1,
     name: "Sergio Pérez",
     email: "sergio@ejemplo.com",
-    role: "student",
+    role: "admin",
     xp: 8200,
     level: 15,
     avatar: "https://i.pravatar.cc/150?img=12",

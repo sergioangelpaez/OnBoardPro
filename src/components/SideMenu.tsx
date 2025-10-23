@@ -140,7 +140,7 @@ const SideMenu = ({ role = "student" }: SideMenuProps) => {
       {/* === Sidebar fijo para Desktop === */}
       <aside
         className={cn(
-          "hidden md:flex flex-col justify-between md:h-screen rounded-2xl p-4 transition-all duration-300 text-white bg-primary",
+          "hidden md:flex flex-col justify-between rounded-2xl p-4 transition-all duration-300 text-white bg-primary",
           collapsed ? "w-[80px]" : "w-[240px]"
         )}
       >

@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 import * as React from "react";
+import { useState } from "react";
 
 import {
   ColumnDef,
@@ -31,16 +32,29 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+} from "@/components/ui/dialog";
+
+import { PlusIcon } from "lucide-react";
+
 import { Columns } from "lucide-react";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  setIsUserDialogOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  setIsUserDialogOpen,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -49,6 +63,14 @@ export function DataTable<TData, TValue>({
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
+
+  const [isMasasveDeletionDialogOpen, setIsMassiveDeletionDialogOpen] =
+    useState(false);
+
+  const handleMassiveDeletion = () => {
+    setIsMassiveDeletionDialogOpen(false);
+    window.location.reload();
+  };
 
   const table = useReactTable({
     data,
@@ -76,9 +98,10 @@ export function DataTable<TData, TValue>({
           <Button
             variant="default"
             size="sm"
-            onClick={() => console.log("Agregar usuario")}
+            onClick={() => setIsUserDialogOpen(true)}
           >
-            Agregar usuario
+            <PlusIcon className="w-4 h-4" />
+            Nuevo Usuario
           </Button>
 
           <Button
@@ -102,10 +125,7 @@ export function DataTable<TData, TValue>({
             <Button
               variant="destructive"
               size="sm"
-              onClick={() => {
-                const selected = table.getFilteredSelectedRowModel().rows;
-                console.log("Borrar filas:", selected);
-              }}
+              onClick={() => setIsMassiveDeletionDialogOpen(true)}
             >
               Borrar seleccionados
             </Button>
@@ -113,7 +133,7 @@ export function DataTable<TData, TValue>({
         </div>
 
         <Input
-          placeholder="Filter emails..."
+          placeholder="Filtra usuarios por email..."
           value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
             table.getColumn("email")?.setFilterValue(event.target.value)
@@ -232,6 +252,49 @@ export function DataTable<TData, TValue>({
             Next
           </Button>
         </div>
+
+        {isMasasveDeletionDialogOpen && (
+          <Dialog
+            open={isMasasveDeletionDialogOpen}
+            onOpenChange={setIsMassiveDeletionDialogOpen}
+          >
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Eliminar usuario</DialogTitle>
+                <DialogDescription>
+                  ¿Estás seguro que quieres eliminar{" "}
+                  {table.getFilteredSelectedRowModel().rows.length} usuarios?
+                  <ul className="mt-2 space-y-1">
+                    {table.getFilteredSelectedRowModel().rows.map((row) => (
+                      <li
+                        key={row.getValue("email")}
+                        className="list-disc list-inside"
+                      >
+                        {row.getValue("email")}
+                      </li>
+                    ))}
+                  </ul>
+                </DialogDescription>
+              </DialogHeader>
+
+              <DialogFooter className="pt-4">
+                <Button
+                  variant="outline"
+                  onClick={() => setIsMassiveDeletionDialogOpen(false)}
+                >
+                  Cancelar
+                </Button>
+                <Button
+                  type="button"
+                  onClick={handleMassiveDeletion}
+                  variant="destructive"
+                >
+                  Eliminar
+                </Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
+        )}
       </div>
     </div>
   );

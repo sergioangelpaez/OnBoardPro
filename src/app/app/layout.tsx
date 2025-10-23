@@ -12,13 +12,13 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
   const userRole = user?.role || "student";
 
   return (
-    <div className="min-h-dvh w-full flex bg-primary">
+    <div className="max-h-screen w-full flex bg-primary">
       {/* === Sidebar / Drawer (handles both mobile + desktop) === */}
       <SideMenu role={userRole} />
 
       {/* === Main Content === */}
       <div className="flex-1 flex flex-col bg-background text-foreground md:rounded-2xl md:m-3 overflow-hidden">
-        <ScrollArea className="flex-1 w-full">
+        <ScrollArea className="flex-1 w-full overflow-y-auto">
           <main
             className="
     min-h-dvh
