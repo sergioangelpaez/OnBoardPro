@@ -5,7 +5,7 @@ import {
   Users,
   Settings,
   LogOut,
-  Calendar,
+  BookMarkedIcon,
   FileText,
   ChevronLeft,
   ChevronRight,
@@ -45,22 +45,10 @@ const SideMenu = ({ role = "student" }: SideMenuProps) => {
     admin: [
       { label: "Dashboard", icon: Grid2X2, href: "/app/dashboard" },
       { label: "Usuarios", icon: Users, href: "/app/users" },
-      { label: "Citas", icon: Calendar, href: "/app/appointments" },
-      { label: "Reportes", icon: FileText, href: "/app/reports" },
-    ],
-    doctor: [
-      { label: "Dashboard", icon: Grid2X2, href: "/app/dashboard" },
-      { label: "Mis Citas", icon: Calendar, href: "/app/my-appointments" },
-      { label: "Pacientes", icon: UserCircle2, href: "/app/patients" },
-      {
-        label: "Reportes Médicos",
-        icon: ClipboardList,
-        href: "/app/medical-reports",
-      },
+      { label: "Cursos", icon: BookMarkedIcon, href: "/app/courses" },
     ],
     patient: [
       { label: "Dashboard", icon: Grid2X2, href: "/app/dashboard" },
-      { label: "Agendar Cita", icon: Calendar, href: "/app/book-appointment" },
       { label: "Mis Médicos", icon: Stethoscope, href: "/app/doctors" },
       { label: "Historial", icon: FileText, href: "/app/history" },
     ],
@@ -141,7 +129,7 @@ const SideMenu = ({ role = "student" }: SideMenuProps) => {
       <aside
         className={cn(
           "hidden md:flex flex-col justify-between rounded-2xl p-4 transition-all duration-300 text-white bg-primary",
-          collapsed ? "w-[80px]" : "w-[240px]"
+          collapsed ? "w-20" : "w-60"
         )}
       >
         <div className="flex items-center justify-between mb-6 px-2">

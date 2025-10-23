@@ -62,7 +62,7 @@ export function DataTable<TData, TValue>({
     React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
 
-  const [isMasasveDeletionDialogOpen, setIsMassiveDeletionDialogOpen] =
+  const [isMassiveDeletionDialogOpen, setIsMassiveDeletionDialogOpen] =
     useState(false);
 
   const handleMassiveDeletion = () => {
@@ -99,7 +99,7 @@ export function DataTable<TData, TValue>({
             onClick={() => setIsUserDialogOpen(true)}
           >
             <PlusIcon className="w-4 h-4" />
-            <span className="hidden md:block">Nuevo Usuario</span>
+            <span className="hidden md:block">Nuevo Curso</span>
           </Button>
 
           <Button variant="outline" size="sm">
@@ -124,10 +124,10 @@ export function DataTable<TData, TValue>({
         </div>
 
         <Input
-          placeholder="Filtra usuarios por email..."
-          value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
+          placeholder="Filtra cursos por nombre..."
+          value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
-            table.getColumn("email")?.setFilterValue(event.target.value)
+            table.getColumn("name")?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />
@@ -244,9 +244,9 @@ export function DataTable<TData, TValue>({
           </Button>
         </div>
 
-        {isMasasveDeletionDialogOpen && (
+        {isMassiveDeletionDialogOpen && (
           <Dialog
-            open={isMasasveDeletionDialogOpen}
+            open={isMassiveDeletionDialogOpen}
             onOpenChange={setIsMassiveDeletionDialogOpen}
           >
             <DialogContent>

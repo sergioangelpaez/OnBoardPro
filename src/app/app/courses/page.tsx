@@ -3,7 +3,7 @@
 import React from "react";
 import useUserStore from "@/stores/UserStore";
 import { DataTable } from "./table/data-table";
-import { User } from "@/types/user";
+import { Course } from "@/types/course";
 import { columns } from "./table/columns";
 import { useState } from "react";
 
@@ -28,143 +28,33 @@ import {
 import { UserIcon } from "lucide-react";
 import { DropdownMenuRadioItem } from "@radix-ui/react-dropdown-menu";
 
-export default function UsersPage() {
+export default function Courses() {
   const user = useUserStore((s) => s.user);
-  const data: User[] = [
+  const data: Course[] = [
     {
-      id: 12345345,
-      name: "Sergio",
-      email: "sergio@correo.com",
-      role: "student",
-      xp: 123,
-      level: 20,
+      id: "ABC123",
+      name: "Test course name",
+      status: "active",
+      instructor: "Sergio Angel",
+      activities: 2,
+      submissions: 3,
     },
     {
-      id: 123,
-      name: "Sergio",
-      email: "sergio@correo.com",
-      role: "student",
-      xp: 123,
-      level: 20,
-    },
-    {
-      id: 123,
-      name: "Sergio",
-      email: "sergio@correo.com",
-      role: "student",
-      xp: 123,
-      level: 20,
-    },
-    {
-      id: 123,
-      name: "Sergio",
-      email: "sergio@correo.com",
-      role: "student",
-      xp: 123,
-      level: 20,
-    },
-    {
-      id: 123,
-      name: "Sergio",
-      email: "sergio@correo.com",
-      role: "student",
-      xp: 123,
-      level: 20,
-    },
-    {
-      id: 123,
-      name: "Sergio",
-      email: "sergio@correo.com",
-      role: "student",
-      xp: 123,
-      level: 20,
-    },
-    {
-      id: 123,
-      name: "Sergio",
-      email: "sergio@correo.com",
-      role: "student",
-      xp: 123,
-      level: 20,
-    },
-    {
-      id: 123,
-      name: "Sergio",
-      email: "sergio@correo.com",
-      role: "student",
-      xp: 123,
-      level: 20,
-    },
-    {
-      id: 123,
-      name: "Sergio",
-      email: "sergio@correo.com",
-      role: "student",
-      xp: 123,
-      level: 20,
-    },
-    {
-      id: 123,
-      name: "Sergio",
-      email: "sergio@correo.com",
-      role: "student",
-      xp: 123,
-      level: 20,
-    },
-    {
-      id: 123,
-      name: "Sergio",
-      email: "sergio@correo.com",
-      role: "student",
-      xp: 123,
-      level: 20,
-    },
-    {
-      id: 123,
-      name: "Sergio",
-      email: "sergio@correo.com",
-      role: "student",
-      xp: 123,
-      level: 20,
-    },
-    {
-      id: 123,
-      name: "Sergio",
-      email: "sergio@correo.com",
-      role: "student",
-      xp: 123,
-      level: 20,
-    },
-    {
-      id: 123,
-      name: "Sergio",
-      email: "aergio@correo.com",
-      role: "student",
-      xp: 123,
-      level: 20,
-    },
-    {
-      id: 123,
-      name: "Sergio",
-      email: "sergio@correo.com",
-      role: "student",
-      xp: 123,
-      level: 20,
-    },
-    {
-      id: 123,
-      name: "Sergio",
-      email: "sergio@correo.com",
-      role: "student",
-      xp: 123,
-      level: 20,
+      id: "ABC123",
+      name: "Another course",
+      status: "active",
+      instructor: "Sergio Angel",
+      activities: 2,
+      submissions: 3,
     },
   ];
+
   const [isAddUserDialogOpen, setIsUserDialogOpen] = useState(false);
-  const [rol, setRole] = useState("Estudiante");
   const handleNewUserRequest = (e: React.FormEvent<HTMLFormElement>) => {
     alert(e.timeStamp);
   };
+
+  const [status, setStatus] = useState("active");
 
   if (!user) {
     return <div className="p-6 text-gray-400">Cargando usuario...</div>;
@@ -187,11 +77,9 @@ export default function UsersPage() {
 
   return (
     <div className="overflow-y-auto h-full">
-      <h1 className="text-3xl font-bold mb-2 text-brand">
-        Gestión de usuarios
-      </h1>
+      <h1 className="text-3xl font-bold mb-2 text-brand">Gestión de cursos</h1>
       <p className="text-gray-600">
-        Aquí puedes crear, editar o eliminar usuarios del sistema.
+        Aquí puedes crear, editar o eliminar cursos del sistema.
       </p>
       <DataTable
         columns={columns}
@@ -206,9 +94,9 @@ export default function UsersPage() {
               className="flex flex-col gap-3"
             >
               <DialogHeader>
-                <DialogTitle>Crear nuevo usuario</DialogTitle>
+                <DialogTitle>Crear nuevo curso</DialogTitle>
                 <DialogDescription>
-                  Diligencia todos los campos para crear un nuevo usuario.
+                  Diligencia todos los campos para crear un nuevo curso.
                 </DialogDescription>
               </DialogHeader>
 
@@ -283,16 +171,16 @@ export default function UsersPage() {
                   <DropdownMenuTrigger asChild>
                     <Button variant="outline" className="ml-auto">
                       <UserIcon className="w-4 h-4" />
-                      Rol: <span className="capitalize">{rol}</span>
+                      Estado: <span className="capitalize">{status}</span>
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end">
                     <DropdownMenuRadioGroup
-                      value={rol}
-                      onValueChange={(value) => setRole(value)}
+                      value={status}
+                      onValueChange={(value) => setStatus(status)}
                       className="space-y-2"
                     >
-                      {["estudiante", "instructor", "admin"].map((r) => (
+                      {["active", "archived", "closed"].map((r) => (
                         <DropdownMenuRadioItem
                           key={r}
                           value={r}

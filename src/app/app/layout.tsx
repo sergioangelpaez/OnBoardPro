@@ -22,7 +22,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
           <main
             className="
     min-h-dvh
-    pt-[calc(56px+1rem)] md:pt-0
+    pt-24 p-6 md:pt-6
   "
           >
             {children}
