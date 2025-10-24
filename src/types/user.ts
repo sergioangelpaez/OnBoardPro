@@ -1,3 +1,5 @@
+import { Course } from "./course";
+
 export interface User {
   id: number;
   name: string;
@@ -6,4 +8,5 @@ export interface User {
   avatar?: string;
   xp: number;
   level: number;
+  courses: Course[];
 }

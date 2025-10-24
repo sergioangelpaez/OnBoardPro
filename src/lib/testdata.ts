@@ -1,0 +1,96 @@
+import { Course } from "@/types/course";
+import { User } from "@/types/user";
+
+export const testCourses: Course[] = [
+  {
+    id: "ABC123",
+    name: "Test course name",
+    status: "active",
+    instructor: "Sergio Angel",
+    activities: 2,
+    submissions: 3,
+  },
+  {
+    id: "XYZ456",
+    name: "Another course",
+    status: "active",
+    instructor: "Sergio Angel",
+    activities: 2,
+    submissions: 3,
+  },
+];
+
+export const testUsers: User[] = [
+  {
+    id: 12345345,
+    name: "Sergio",
+    email: "sergio@correo.com",
+    role: "student",
+    xp: 123,
+    level: 20,
+    courses: [testCourses[0], testCourses[1]],
+  },
+  {
+    id: 123,
+    name: "Sergio",
+    email: "sergio@correo.com",
+    role: "student",
+    xp: 130,
+    level: 21,
+    courses: [testCourses[0]],
+  },
+  {
+    id: 124,
+    name: "Ana",
+    email: "ana@correo.com",
+    role: "student",
+    xp: 98,
+    level: 15,
+    courses: [testCourses[1]],
+  },
+  {
+    id: 125,
+    name: "Luis",
+    email: "luis@correo.com",
+    role: "student",
+    xp: 200,
+    level: 30,
+    courses: [],
+  },
+  {
+    id: 126,
+    name: "Camila",
+    email: "camila@correo.com",
+    role: "student",
+    xp: 75,
+    level: 12,
+    courses: [],
+  },
+  {
+    id: 127,
+    name: "Jorge",
+    email: "jorge@correo.com",
+    role: "student",
+    xp: 155,
+    level: 24,
+    courses: [testCourses[1]],
+  },
+  {
+    id: 128,
+    name: "Laura",
+    email: "laura@correo.com",
+    role: "student",
+    xp: 185,
+    level: 28,
+    courses: [testCourses[0], testCourses[1]],
+  },
+  {
+    id: 129,
+    name: "Sofia",
+    email: "sofia@correo.com",
+    role: "student",
+    xp: 115,
+    level: 19,
+    courses: [],
+  },
+];
