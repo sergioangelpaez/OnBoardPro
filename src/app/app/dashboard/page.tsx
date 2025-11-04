@@ -1,16 +1,27 @@
 "use client";
 
-import useUserStore from "@/stores/UserStore";
+import { useEffect, useState } from "react";
 import AllCourses from "../components/AllCourses";
 import RecentCourses from "../components/RecentCourses";
 import UserBanner from "../components/UserBanner";
 import UpcomingSubmissions from "../components/UpcomingSubmissions";
 import ClasificationTable from "@/components/ClasificationTable";
 import { useRouter } from "next/navigation";
+import useUserStore from "@/stores/UserStore";
 
 const Dashboard = () => {
-  const user = useUserStore((s) => s.user);
+  const user = useUserStore((state) => state.user);
   const router = useRouter();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    useUserStore.getState().loadUserFromStorage();
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
 
   if (!user) {
     return (
@@ -22,18 +33,13 @@ const Dashboard = () => {
     );
   }
 
-  switch (user.role) {
-    case "student":
+  switch (user.rol) {
+    case "Aprendiz":
       return (
         <main className="w-full h-full grid grid-cols-1 lg:grid-cols-[1fr_0.4fr] gap-3 p-3">
           <div className="flex flex-col gap-3">
-            {/* User Banner */}
             <UserBanner user={user} />
-
-            {/* Recent Courses Section */}
             <RecentCourses />
-
-            {/** All Courses Section */}
             <div className="grid md:grid-cols-2 gap-3">
               <AllCourses />
               <UpcomingSubmissions />
@@ -51,9 +57,9 @@ const Dashboard = () => {
         </main>
       );
     case "teacher":
-      return <p>Hola, {user.role}</p>;
+      return <p>Hola, {user.rol}</p>;
     default:
-      router.push("/");
+      return null;
   }
 };
 

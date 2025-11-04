@@ -12,6 +12,13 @@ const poppins = Poppins({
   variable: "--font-poppins",
 });
 
+export const metadata = {
+  title: "Onboard Pro - Login",
+  icons: {
+    icon: "/favicon.svg",
+  },
+};
+
 export default function RootLayout({
   children,
 }: {

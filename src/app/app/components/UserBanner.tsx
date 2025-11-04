@@ -33,14 +33,14 @@ const UserBanner: React.FC<UserBannerProps> = ({ user }) => {
 
       <Container
         aria-labelledby="user-banner-title"
-        className="p-3 grid grid-cols-1 md:grid-cols-2 md:gap-3 grid-rows-[1fr_auto] md:grid-rows-1 h-fit"
+        className="p-3 grid grid-cols-1 md:grid-cols-2 md:gap-3 grid-rows-[1fr_auto] md:grid-rows-1 h-fit bg-white"
       >
         {/* Avatar + User Info */}
         <div className="grid grid-cols-[auto_1fr] gap-5 col-span-2 md:col-span-1">
           <div>
             <img
-              src={user.avatar || "/hornet.jpg"}
-              alt={`Avatar de ${user.name}`}
+              src="/hornet.jpg"
+              alt={`Avatar de ${user.firstname}`}
               className="w-25 h-25 min-w-25 min-h-25 rounded-full"
             />
           </div>
@@ -49,9 +49,9 @@ const UserBanner: React.FC<UserBannerProps> = ({ user }) => {
               <p className="text-lg text-text-secondary font-sans">Hola,</p>
               <h2
                 id="user-banner-title"
-                className="text-brand truncate leading-tight"
+                className="text-primary truncate leading-tight text-3xl"
               >
-                {user.name}
+                {user.fisrtname}
               </h2>
             </div>
             <Divider />

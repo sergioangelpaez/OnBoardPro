@@ -5,7 +5,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import useUserStore from "@/stores/UserStore";
 import SideMenu from "@/components/SideMenu";
 
-const HEADER_HEIGHT = 56; // matches the mobile navbar height (py-3 + text size)
+const HEADER_HEIGHT = 56;
 
 const DashboardLayout = ({ children }: { children: ReactNode }) => {
   const user = useUserStore((s) => s.user);

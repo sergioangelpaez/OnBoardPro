@@ -1,12 +1,17 @@
-import { Course } from "./course";
+import type { Group } from "./group";
+import type { Course } from "./course";
 
 export interface User {
-  id: number;
-  name: string;
+  id: string;
+  fisrtname: string;
+  lastname: string;
+  phonenumber: StringConstructor;
   email: string;
-  role: "student" | "teacher" | "admin";
-  avatar?: string;
-  xp: number;
   level: number;
-  courses: Course[];
+  rol: string;
+  status: string;
+  xp?: number;
+  group?: string;
+  groups?: Group[];
+  courses?: Course[];
 }
