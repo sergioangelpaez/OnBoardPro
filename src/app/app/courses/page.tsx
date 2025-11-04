@@ -40,7 +40,11 @@ export default function Courses() {
 
   const [status, setStatus] = useState("Borrador");
   const [instructor, setInstructor] = useState("Sergio Angel");
-  const [activities, setActivities] = useState([]);
+  const [activities, setActivities] = useState<any[]>([]);
+
+  const handleAddActivity = (newActivity: any) => {
+    setActivities((prev) => [...prev, newActivity]);
+  };
 
   if (!user) {
     return <div className="p-6 text-gray-400">Cargando usuario...</div>;
@@ -176,7 +180,11 @@ export default function Courses() {
                   <span className="text-muted-foreground text-sm block w-fit">
                     Actividades ({activities.length})
                   </span>
-                  <Button variant="outline" type="button">
+                  <Button
+                    variant="outline"
+                    type="button"
+                    onClick={() => handleAddActivity({ name: "Test step" })}
+                  >
                     <PlusCircleIcon className="w-4 h-4" />
                     Nueva actividad
                   </Button>
@@ -188,7 +196,13 @@ export default function Courses() {
                       No has agregado ninguna actividad.
                     </span>
                   ) : (
-                    <span>Hola</span>
+                    <div className="bg-accent p-2">
+                      <ul>
+                        {activities.map((activity) => (
+                          <li key={activity.name}>{activity.name}</li>
+                        ))}
+                      </ul>
+                    </div>
                   )}
                 </div>
               </div>
