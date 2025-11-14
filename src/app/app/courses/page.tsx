@@ -1,11 +1,10 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import useUserStore from "@/stores/UserStore";
 import { DataTable } from "./table/data-table";
 import { Course } from "@/types/course";
 import { columns } from "./table/columns";
-import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -29,20 +28,27 @@ import { UserIcon, BookLockIcon, PlusCircleIcon } from "lucide-react";
 import { DropdownMenuRadioItem } from "@radix-ui/react-dropdown-menu";
 import { testCourses } from "@/lib/testdata";
 
+type Activity = {
+  name: string;
+};
+
 export default function Courses() {
   const user = useUserStore((s) => s.user);
   const data: Course[] = testCourses;
 
   const [isAddUserDialogOpen, setIsUserDialogOpen] = useState(false);
+  const [status, setStatus] = useState<"Publicado" | "Privado" | "Borrador">(
+    "Borrador"
+  );
+  const [instructor, setInstructor] = useState<string>("Sergio Angel");
+  const [activities, setActivities] = useState<Activity[]>([]);
+
   const handleNewUserRequest = (e: React.FormEvent<HTMLFormElement>) => {
-    alert(e.timeStamp);
+    e.preventDefault();
+    alert(`Curso creado con ${activities.length} actividad(es)`);
   };
 
-  const [status, setStatus] = useState("Borrador");
-  const [instructor, setInstructor] = useState("Sergio Angel");
-  const [activities, setActivities] = useState<any[]>([]);
-
-  const handleAddActivity = (newActivity: any) => {
+  const handleAddActivity = (newActivity: Activity) => {
     setActivities((prev) => [...prev, newActivity]);
   };
 
@@ -105,7 +111,7 @@ export default function Courses() {
                 />
               </div>
 
-              <div className="grid grid-cols-2">
+              <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <label
                     htmlFor="courseStatus"
@@ -123,14 +129,18 @@ export default function Courses() {
                     <DropdownMenuContent align="end">
                       <DropdownMenuRadioGroup
                         value={status}
-                        onValueChange={(value) => setStatus(value)}
+                        onValueChange={(value) =>
+                          setStatus(
+                            value as "Publicado" | "Privado" | "Borrador"
+                          )
+                        }
                         className="space-y-2"
                       >
                         {["Publicado", "Privado", "Borrador"].map((r) => (
                           <DropdownMenuRadioItem
                             key={r}
                             value={r}
-                            className="text-sm hover:bg-accent capitalize focus:bg-accent focus:text-accent-foreground data-[variant=destructive]:text-destructive data-[variant=destructive]:focus:bg-destructive/10 dark:data-[variant=destructive]:focus:bg-destructive/20 data-[variant=destructive]:focus:text-destructive data-[variant=destructive]:*:[svg]:text-destructive! [&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 outline-hidden select-none data-disabled:pointer-events-none data-disabled:opacity-50 data-inset:pl-8 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 hover:text-white"
+                            className="text-sm capitalize"
                           >
                             {r}
                           </DropdownMenuRadioItem>
@@ -164,7 +174,7 @@ export default function Courses() {
                           <DropdownMenuRadioItem
                             key={r}
                             value={r}
-                            className="text-sm hover:bg-accent capitalize focus:bg-accent focus:text-accent-foreground data-[variant=destructive]:text-destructive data-[variant=destructive]:focus:bg-destructive/10 dark:data-[variant=destructive]:focus:bg-destructive/20 data-[variant=destructive]:focus:text-destructive data-[variant=destructive]:*:[svg]:text-destructive! [&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 outline-hidden select-none data-disabled:pointer-events-none data-disabled:opacity-50 data-inset:pl-8 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 hover:text-white"
+                            className="text-sm capitalize"
                           >
                             {r}
                           </DropdownMenuRadioItem>
@@ -191,7 +201,7 @@ export default function Courses() {
                 </div>
 
                 <div className="border border-border rounded-sm p-2">
-                  {activities.length == 0 ? (
+                  {activities.length === 0 ? (
                     <span className="text-muted-foreground text-sm">
                       No has agregado ninguna actividad.
                     </span>

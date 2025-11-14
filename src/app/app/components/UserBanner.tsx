@@ -32,7 +32,7 @@ const UserBanner: React.FC<UserBannerProps> = ({ user }) => {
           <div>
             <img
               src="/hornet.jpg"
-              alt={`Avatar de ${user.fisrtname}`}
+              alt={`Avatar de ${user.firstname}`}
               className="w-25 h-25 min-w-25 min-h-25 rounded-full"
             />
           </div>
@@ -43,7 +43,7 @@ const UserBanner: React.FC<UserBannerProps> = ({ user }) => {
                 id="user-banner-title"
                 className="text-primary truncate leading-tight text-3xl"
               >
-                {user.fisrtname}
+                {user.firstname}
               </h2>
             </div>
             <Divider />
