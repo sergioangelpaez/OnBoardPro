@@ -52,7 +52,7 @@ export default function Courses() {
 
   if (user.role !== "admin") {
     return (
-      <div className="flex h-full items-center justify-center">
+      <div className="flex h-full items-center justify-center p-6">
         <div className="text-center">
           <h2 className="text-2xl font-semibold text-red-600">
             No estás autorizado para ver esta página

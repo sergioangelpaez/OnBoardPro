@@ -9,24 +9,16 @@ const HEADER_HEIGHT = 56;
 
 const DashboardLayout = ({ children }: { children: ReactNode }) => {
   const user = useUserStore((s) => s.user);
-  const userRole = user?.role || "student";
 
   return (
     <div className="max-h-screen w-full flex bg-primary">
       {/* === Sidebar / Drawer (handles both mobile + desktop) === */}
-      <SideMenu role={userRole} />
+      <SideMenu />
 
       {/* === Main Content === */}
       <div className="flex-1 flex flex-col bg-background text-foreground md:rounded-2xl md:m-3 overflow-hidden">
         <ScrollArea className="flex-1 w-full overflow-y-auto">
-          <main
-            className="
-    min-h-dvh
-    pt-24 p-6 md:pt-6
-  "
-          >
-            {children}
-          </main>
+          <main className="min-h-dvh pt-20 md:pt-2">{children}</main>
         </ScrollArea>
       </div>
     </div>

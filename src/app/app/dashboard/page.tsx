@@ -6,12 +6,10 @@ import RecentCourses from "../components/RecentCourses";
 import UserBanner from "../components/UserBanner";
 import UpcomingSubmissions from "../components/UpcomingSubmissions";
 import ClasificationTable from "@/components/ClasificationTable";
-import { useRouter } from "next/navigation";
 import useUserStore from "@/stores/UserStore";
 
 const Dashboard = () => {
   const user = useUserStore((state) => state.user);
-  const router = useRouter();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -33,8 +31,8 @@ const Dashboard = () => {
     );
   }
 
-  switch (user.rol) {
-    case "Aprendiz":
+  switch (user.role) {
+    case "student":
       return (
         <main className="w-full h-full grid grid-cols-1 lg:grid-cols-[1fr_0.4fr] gap-3 p-3">
           <div className="flex flex-col gap-3">
@@ -56,8 +54,8 @@ const Dashboard = () => {
           <h1>Hola, admin</h1>
         </main>
       );
-    case "teacher":
-      return <p>Hola, {user.rol}</p>;
+    case "instructor":
+      return <p>Hola, {user.role}</p>;
     default:
       return null;
   }

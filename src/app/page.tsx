@@ -22,8 +22,6 @@ import {
 import api from "@/lib/api";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { User } from "@/types/user";
-import { jwtDecode } from "jwt-decode";
 import useUserStore from "@/stores/UserStore";
 
 export default function Login() {
@@ -46,7 +44,8 @@ export default function Login() {
       const { data } = await api.post("/auth/localuser", { email, password });
 
       localStorage.setItem("token", data.token);
-      localStorage.setItem("user", JSON.stringify(data[0]));
+      localStorage.setItem("user", JSON.stringify(data.userData));
+
       setUser(data[0]);
       const user = data[0];
       console.log(user);

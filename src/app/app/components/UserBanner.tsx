@@ -1,28 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Container from "@/components/Container";
 import { User } from "@/types/user";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
 import Divider from "@/components/Divider";
-import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/solid";
 import { ProgressBar } from "@/components/ProgressBar";
+import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/solid";
 
 interface UserBannerProps {
   user: User;
 }
 
 const UserBanner: React.FC<UserBannerProps> = ({ user }) => {
-  const [isStatsOpen, setIsStatsOpen] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 768) {
-        setIsStatsOpen(false);
-      }
-    };
-    window.addEventListener("resize", handleResize);
-    handleResize();
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
   if (!user) return <div>No hay usuario</div>;
 
   return (
@@ -33,14 +25,14 @@ const UserBanner: React.FC<UserBannerProps> = ({ user }) => {
 
       <Container
         aria-labelledby="user-banner-title"
-        className="p-3 grid grid-cols-1 md:grid-cols-2 md:gap-3 grid-rows-[1fr_auto] md:grid-rows-1 h-fit bg-white"
+        className="p-3 grid grid-cols-1 md:grid-cols-[1fr_auto] md:gap-3 grid-rows-[1fr_auto] md:grid-rows-1 h-fit bg-white"
       >
         {/* Avatar + User Info */}
         <div className="grid grid-cols-[auto_1fr] gap-5 col-span-2 md:col-span-1">
           <div>
             <img
               src="/hornet.jpg"
-              alt={`Avatar de ${user.firstname}`}
+              alt={`Avatar de ${user.fisrtname}`}
               className="w-25 h-25 min-w-25 min-h-25 rounded-full"
             />
           </div>
@@ -60,50 +52,60 @@ const UserBanner: React.FC<UserBannerProps> = ({ user }) => {
                 Nivel {user.level}
               </p>
               <div className="flex-1">
-                <ProgressBar progress={50} requiredXp={120} />
+                <ProgressBar />
               </div>
             </div>
           </div>
         </div>
 
         {/* Stats Section */}
-        <aside className="flex items-center flex-col mt-5">
-          <button
-            className="flex items-center justify-center gap-1 md:hidden"
-            onClick={() => setIsStatsOpen((prev) => !prev)}
-            aria-expanded={isStatsOpen}
-            aria-controls="user-stats"
-          >
-            {isStatsOpen ? (
-              <>
-                <span className="text-brand text-sm font-semibold">
-                  Ocultar estadísticas
-                </span>
-                <ChevronUpIcon className="size-4 text-brand" />
-              </>
-            ) : (
-              <>
+        <aside className="flex items-center justify-center flex-col mt-5 md:mt-0">
+          {/* Mobile Collapsible */}
+          <div className="md:hidden w-full">
+            <Collapsible>
+              <CollapsibleTrigger className="flex items-center justify-center gap-1 w-full py-2">
                 <span className="text-brand text-sm font-semibold">
                   Ver estadísticas
                 </span>
                 <ChevronDownIcon className="size-4 text-brand" />
-              </>
-            )}
-          </button>
+              </CollapsibleTrigger>
+              <CollapsibleContent className="w-full mt-3">
+                <Divider />
+                <div className="grid grid-cols-3 gap-3">
+                  {/* Promedio */}
+                  <div className="flex justify-center items-center flex-col">
+                    <h3 className="text-primary text-2xl font-semibold">4.5</h3>
+                    <p className="text-text-secondary text-center font-sans">
+                      Promedio
+                    </p>
+                  </div>
 
-          <div
-            id="user-stats"
-            className={`w-full ${
-              isStatsOpen ? "grid" : "hidden"
-            } md:grid flex flex-col gap-3 mt-3 transition-all duration-300 ease-in-out 
-                  overflow-hidden opacity-0 scale-y-95 animate-fadeIn`}
-          >
-            {isStatsOpen && <Divider />}
+                  {/* Misiones */}
+                  <div className="flex justify-center items-center flex-col">
+                    <h3 className="text-primary text-2xl font-semibold">3/7</h3>
+                    <p className="text-text-secondary text-center font-sans">
+                      Misiones
+                    </p>
+                  </div>
 
-            <div className="grid grid-cols-3">
+                  {/* Días de racha */}
+                  <div className="flex justify-center items-center flex-col">
+                    <h3 className="text-primary text-2xl font-semibold">120</h3>
+                    <p className="text-text-secondary text-center line-clamp-1 truncate">
+                      Días de racha
+                    </p>
+                  </div>
+                </div>
+              </CollapsibleContent>
+            </Collapsible>
+          </div>
+
+          {/* Desktop Stats Always Visible */}
+          <div className="hidden md:flex w-full flex-col mt-3 gap-3">
+            <div className="grid grid-cols-3 gap-3">
               {/* Promedio */}
               <div className="flex justify-center items-center flex-col">
-                <h3 className="text-brand text-center font-semibold">4.5</h3>
+                <h3 className="text-primary text-2xl font-semibold">4.5</h3>
                 <p className="text-text-secondary text-center font-sans">
                   Promedio
                 </p>
@@ -111,7 +113,7 @@ const UserBanner: React.FC<UserBannerProps> = ({ user }) => {
 
               {/* Misiones */}
               <div className="flex justify-center items-center flex-col">
-                <h3 className="text-brand text-center font-semibold">3/7</h3>
+                <h3 className="text-primary text-2xl font-semibold">3/7</h3>
                 <p className="text-text-secondary text-center font-sans">
                   Misiones
                 </p>
@@ -119,7 +121,7 @@ const UserBanner: React.FC<UserBannerProps> = ({ user }) => {
 
               {/* Días de racha */}
               <div className="flex justify-center items-center flex-col">
-                <h3 className="text-brand text-center font-semibold">120</h3>
+                <h3 className="text-primary text-2xl font-semibold">120</h3>
                 <p className="text-text-secondary text-center font-sans">
                   Días de racha
                 </p>
