@@ -32,10 +32,12 @@ export default function Login() {
   const router = useRouter();
   const { setUser } = useUserStore();
 
-  // Manejo del login social desde query string
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const token = params.get("token");
+
+    console.log("Token recibido de Google:", token);
+
     if (!token) return;
 
     const verifySocialLogin = async () => {
