@@ -36,8 +36,6 @@ export default function Login() {
     const params = new URLSearchParams(window.location.search);
     const token = params.get("token");
 
-    console.log("Token recibido de Google:", token);
-
     if (!token) return;
 
     const verifySocialLogin = async () => {
