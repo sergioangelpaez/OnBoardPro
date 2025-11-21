@@ -31,6 +31,8 @@ export default function Login() {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const { setUser } = useUserStore();
+  const [resetEmail, setResetEmail] = useState("");
+  const [sent, setSent] = useState(false);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -212,36 +214,70 @@ export default function Login() {
           <DialogHeader>
             <DialogTitle>Recuperar contraseña</DialogTitle>
             <DialogDescription>
-              Ingresa tu correo y te enviaremos un enlace para restablecer tu
-              contraseña.
+              {sent
+                ? ""
+                : "Ingresa tu correo y te enviaremos un enlace para restablecer tu contraseña."}
             </DialogDescription>
           </DialogHeader>
 
-          <div className="space-y-2 pt-2">
-            <label
-              htmlFor="resetEmail"
-              className="text-sm text-muted-foreground"
-            >
-              Correo electrónico
-            </label>
-            <Input
-              id="resetEmail"
-              type="email"
-              placeholder="correo@ejemplo.com"
-              disabled={isLoading}
-            />
-          </div>
+          {!sent ? (
+            <>
+              <div className="space-y-2 pt-2">
+                <label
+                  htmlFor="resetEmail"
+                  className="text-sm text-muted-foreground"
+                >
+                  Correo electrónico
+                </label>
+                <Input
+                  id="resetEmail"
+                  type="email"
+                  placeholder="correo@ejemplo.com"
+                  disabled={isLoading}
+                  value={resetEmail}
+                  onChange={(e) => setResetEmail(e.target.value)}
+                />
+              </div>
 
-          <DialogFooter className="pt-4">
-            <Button
-              variant="outline"
-              onClick={() => setIsModalOpen(false)}
-              disabled={isLoading}
-            >
-              Cancelar
-            </Button>
-            <Button disabled={isLoading}>Enviar enlace</Button>
-          </DialogFooter>
+              <DialogFooter className="pt-4">
+                <Button
+                  variant="outline"
+                  onClick={() => setIsModalOpen(false)}
+                  disabled={isLoading}
+                >
+                  Cancelar
+                </Button>
+                <Button
+                  onClick={() => {
+                    setIsLoading(true);
+                    setTimeout(() => {
+                      setSent(true);
+                      setIsLoading(false);
+                    }, 500);
+                  }}
+                  disabled={isLoading || !resetEmail}
+                >
+                  {isLoading ? "Enviando..." : "Continuar"}
+                </Button>
+              </DialogFooter>
+            </>
+          ) : (
+            <div className="pt-4 text-sm text-gray-700">
+              Si tu correo se encuentra registrado, te enviaremos instrucciones
+              para recuperar la contraseña.
+              <div className="pt-4 flex justify-end">
+                <Button
+                  onClick={() => {
+                    setIsModalOpen(false);
+                    setSent(false);
+                    setResetEmail("");
+                  }}
+                >
+                  Cerrar
+                </Button>
+              </div>
+            </div>
+          )}
         </DialogContent>
       </Dialog>
     </div>

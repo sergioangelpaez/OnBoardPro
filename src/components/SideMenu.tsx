@@ -11,8 +11,8 @@ import {
   ChevronRight,
   Stethoscope,
   ClipboardList,
-  UserCircle2,
   Menu,
+  FileImage,
 } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
@@ -46,6 +46,7 @@ const SideMenu = ({ role = "student" }: SideMenuProps) => {
       { label: "Dashboard", icon: Grid2X2, href: "/app/dashboard" },
       { label: "Usuarios", icon: Users, href: "/app/users" },
       { label: "Cursos", icon: BookMarkedIcon, href: "/app/courses" },
+      { label: "Actividades", icon: FileImage, href: "/app/activities" },
     ],
     patient: [
       { label: "Dashboard", icon: Grid2X2, href: "/app/dashboard" },
@@ -55,7 +56,7 @@ const SideMenu = ({ role = "student" }: SideMenuProps) => {
     student: [
       { label: "Dashboard", icon: Grid2X2, href: "/app/dashboard" },
       { label: "Cursos", icon: ClipboardList, href: "/app/courses" },
-      { label: "Evaluaciones", icon: FileText, href: "/app/exams" },
+      { label: "Usuarios", icon: FileText, href: "/app/users" },
     ],
   };
 

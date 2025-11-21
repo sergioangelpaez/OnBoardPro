@@ -1,3 +1,5 @@
+import { Achievement } from "@/types/achievement";
+import { Activity } from "@/types/activity";
 import { Course } from "@/types/course";
 import { User } from "@/types/user";
 
@@ -23,8 +25,7 @@ export const testCourses: Course[] = [
 export const testUsers: User[] = [
   {
     id: "U001",
-    firstname: "Sergio",
-    lastname: "Angel",
+    name: "Sergio",
     phonenumber: "+573001234567",
     email: "sergio@correo.com",
     role: "student",
@@ -37,8 +38,7 @@ export const testUsers: User[] = [
   },
   {
     id: "U002",
-    firstname: "Ana",
-    lastname: "Paez",
+    name: "Ana Paez",
     phonenumber: "+573002345678",
     email: "ana@correo.com",
     role: "student",
@@ -51,8 +51,7 @@ export const testUsers: User[] = [
   },
   {
     id: "U003",
-    firstname: "Luis",
-    lastname: "Martinez",
+    name: "Luis Martinez",
     phonenumber: "+573003456789",
     email: "luis@correo.com",
     role: "student",
@@ -65,8 +64,7 @@ export const testUsers: User[] = [
   },
   {
     id: "U004",
-    firstname: "Camila",
-    lastname: "Gomez",
+    name: "Camila Gomez",
     phonenumber: "+573004567890",
     email: "camila@correo.com",
     role: "student",
@@ -79,8 +77,7 @@ export const testUsers: User[] = [
   },
   {
     id: "U005",
-    firstname: "Jorge",
-    lastname: "Lopez",
+    name: "Jorge Lopez",
     phonenumber: "+573005678901",
     email: "jorge@correo.com",
     role: "student",
@@ -93,8 +90,7 @@ export const testUsers: User[] = [
   },
   {
     id: "U006",
-    firstname: "Laura",
-    lastname: "Ramirez",
+    name: "Laura Ramirez",
     phonenumber: "+573006789012",
     email: "laura@correo.com",
     role: "student",
@@ -107,8 +103,7 @@ export const testUsers: User[] = [
   },
   {
     id: "U007",
-    firstname: "Sofia",
-    lastname: "Castro",
+    name: "Sofia Castro",
     phonenumber: "+573007890123",
     email: "sofia@correo.com",
     role: "student",
@@ -121,8 +116,7 @@ export const testUsers: User[] = [
   },
   {
     id: "U008",
-    firstname: "Admin",
-    lastname: "User",
+    name: "Admin User",
     phonenumber: "+573008901234",
     email: "admin@correo.com",
     role: "admin",
@@ -132,5 +126,40 @@ export const testUsers: User[] = [
     average: 100,
     missions: 10,
     streak: 10,
+  },
+];
+
+export const testAchievements: Achievement[] = [
+  {
+    id: "A001",
+    name: "Logro 1",
+    img: "uploads/logro.png",
+  },
+];
+
+export const testActivities: Activity[] = [
+  {
+    id: "A001",
+    name: "Test Activity",
+    description: "This is a test activity",
+    attachment: "uploads/archivo.mp4",
+    assignedTo: [
+      {
+        id: "ABC123",
+        name: "Test course name",
+        status: "active",
+        instructor: "Sergio Angel",
+        activities: 2,
+        submissions: 3,
+      },
+    ],
+    xp: 2000,
+    achievements: [
+      {
+        id: "A001",
+        name: "Logro 1",
+        img: "uploads/logro.png",
+      },
+    ],
   },
 ];

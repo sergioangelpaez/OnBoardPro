@@ -1,3 +1,5 @@
+"use client";
+
 import { toast } from "sonner";
 import { useState } from "react";
 import { ColumnDef } from "@tanstack/react-table";
@@ -11,8 +13,6 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
 } from "@/components/ui/dropdown-menu";
 import {
   Dialog,
@@ -24,31 +24,28 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 
-import { Course } from "@/types/course";
+import { Activity } from "@/types/activity";
 
-function ActionsCell({ course }: { course: Course }) {
+function ActionsCell({ activity }: { activity: Activity }) {
   const [isDeletionDialogOpen, setIsDeletionDialogOpen] = useState(false);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
-  const [status, setStatus] = useState<"active" | "archived" | "closed">(
-    "active"
-  );
 
-  const handleUserDeletion = () => {
+  const handleActivityDeletion = () => {
     setIsDeletionDialogOpen(false);
-    toast.success(`Curso "${course.name}" eliminado correctamente`, {
+    toast.success(`Actividad "${activity.name}" eliminada correctamente`, {
       description: "Esta acción no se puede deshacer",
     });
   };
 
-  const handleUserEdit = (e: React.FormEvent) => {
+  const handleActivityEdit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsEditDialogOpen(false);
-    toast.success(`Curso "${course.name}" actualizado correctamente`);
+    toast.success(`Actividad "${activity.name}" actualizada correctamente`);
   };
 
   const handleCopyId = async () => {
-    await navigator.clipboard.writeText(course.id);
-    toast.success(`ID "${course.id}" copiado al portapapeles`);
+    await navigator.clipboard.writeText(activity.id);
+    toast.success(`ID "${activity.id}" copiado al portapapeles`);
   };
 
   return (
@@ -73,7 +70,6 @@ function ActionsCell({ course }: { course: Course }) {
         </DropdownMenuContent>
       </DropdownMenu>
 
-      {/* Dialogo de eliminación */}
       {isDeletionDialogOpen && (
         <Dialog
           open={isDeletionDialogOpen}
@@ -81,9 +77,9 @@ function ActionsCell({ course }: { course: Course }) {
         >
           <DialogContent>
             <DialogHeader>
-              <DialogTitle>Eliminar curso</DialogTitle>
+              <DialogTitle>Eliminar actividad</DialogTitle>
               <DialogDescription>
-                {`¿Estás seguro que quieres eliminar el curso "${course.name}"?`}
+                {`¿Estás seguro que quieres eliminar la actividad "${activity.name}"?`}
               </DialogDescription>
             </DialogHeader>
             <DialogFooter className="pt-4">
@@ -95,7 +91,7 @@ function ActionsCell({ course }: { course: Course }) {
               </Button>
               <Button
                 type="button"
-                onClick={handleUserDeletion}
+                onClick={handleActivityDeletion}
                 variant="destructive"
               >
                 Eliminar
@@ -108,65 +104,118 @@ function ActionsCell({ course }: { course: Course }) {
       {isEditDialogOpen && (
         <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
           <DialogContent>
-            <form onSubmit={handleUserEdit} className="flex flex-col gap-3">
+            <form onSubmit={handleActivityEdit} className="flex flex-col gap-3">
               <DialogHeader>
-                <DialogTitle>Editar curso</DialogTitle>
+                <DialogTitle>Editar actividad</DialogTitle>
                 <DialogDescription>
-                  Ingresa la información nueva del curso. Lo que no necesites
-                  cambiar, déjalo como está.
+                  Ingresa la información nueva de la actividad. Lo que no
+                  necesites cambiar, déjalo como está.
                 </DialogDescription>
               </DialogHeader>
 
+              {/* Nombre */}
               <div className="space-y-2 pt-2">
                 <label
-                  htmlFor="newCourseName"
+                  htmlFor="activityName"
                   className="text-sm text-muted-foreground"
                 >
-                  Nombre del curso
+                  Nombre
                 </label>
                 <Input
-                  id="newCourseName"
+                  id="activityName"
                   type="text"
                   required
-                  placeholder={course.name}
-                  defaultValue={course.name}
+                  placeholder={activity.name}
+                  defaultValue={activity.name}
                 />
               </div>
 
+              {/* Descripción */}
               <div className="space-y-2">
                 <label
-                  htmlFor="courseStatus"
-                  className="text-sm block text-muted-foreground"
+                  htmlFor="activityDescription"
+                  className="text-sm text-muted-foreground"
                 >
-                  Estado:
+                  Descripción
                 </label>
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button variant="outline" className="ml-auto">
-                      <UserIcon className="w-4 h-4" />
-                      Estado: <span className="capitalize">{status}</span>
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end">
-                    <DropdownMenuRadioGroup
-                      value={status}
-                      onValueChange={(value) =>
-                        setStatus(value as "active" | "archived" | "closed")
-                      }
-                      className="space-y-2"
-                    >
-                      {["active", "archived", "closed"].map((s) => (
-                        <DropdownMenuRadioItem
-                          key={s}
-                          value={s}
-                          className="text-sm capitalize"
-                        >
-                          {s}
-                        </DropdownMenuRadioItem>
-                      ))}
-                    </DropdownMenuRadioGroup>
-                  </DropdownMenuContent>
-                </DropdownMenu>
+                <Input
+                  id="activityDescription"
+                  type="text"
+                  placeholder={activity.description}
+                  defaultValue={activity.description}
+                />
+              </div>
+
+              {/* Attachment */}
+              <div className="space-y-2">
+                <label
+                  htmlFor="activityAttachment"
+                  className="text-sm text-muted-foreground"
+                >
+                  Archivo
+                </label>
+                <Input
+                  id="activityAttachment"
+                  type="text"
+                  placeholder={activity.attachment}
+                  defaultValue={activity.attachment}
+                />
+              </div>
+
+              {/* XP */}
+              <div className="space-y-2">
+                <label
+                  htmlFor="activityXp"
+                  className="text-sm text-muted-foreground"
+                >
+                  Experiencia
+                </label>
+                <Input
+                  id="activityXp"
+                  type="number"
+                  placeholder={activity.xp.toString()}
+                  defaultValue={activity.xp}
+                />
+              </div>
+
+              {/* AssignedTo */}
+              <div className="space-y-2">
+                <label
+                  htmlFor="activityAssigned"
+                  className="text-sm text-muted-foreground"
+                >
+                  Asignada a
+                </label>
+                <Input
+                  id="activityAssigned"
+                  type="text"
+                  placeholder={activity.assignedTo
+                    .map((c) => c.name)
+                    .join(", ")}
+                  defaultValue={activity.assignedTo
+                    .map((c) => c.name)
+                    .join(", ")}
+                />
+              </div>
+
+              {/* Achievements */}
+              <div className="space-y-2">
+                <label
+                  htmlFor="activityAchievements"
+                  className="text-sm text-muted-foreground"
+                >
+                  Logros
+                </label>
+                <Input
+                  id="activityAchievements"
+                  type="text"
+                  placeholder={
+                    activity.achievements?.map((a) => a.name).join(", ") || ""
+                  }
+                  defaultValue={
+                    activity.achievements?.map((a) => a.name).join(", ") || ""
+                  }
+                />
               </div>
 
               <DialogFooter className="pt-4">
@@ -186,7 +235,7 @@ function ActionsCell({ course }: { course: Course }) {
   );
 }
 
-export const columns: ColumnDef<Course>[] = [
+export const columns: ColumnDef<Activity>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -221,12 +270,22 @@ export const columns: ColumnDef<Course>[] = [
       </Button>
     ),
   },
-  { accessorKey: "status", header: "Estado" },
-  { accessorKey: "instructor", header: "Instructor" },
-  { accessorKey: "activities", header: "Actividades" },
-  { accessorKey: "submissions", header: "Misiones" },
+  { accessorKey: "description", header: "Descripción" },
+  { accessorKey: "attachment", header: "Archivo" },
+  {
+    accessorKey: "assignedTo",
+    header: "Asignada A",
+    cell: ({ row }) => row.original.assignedTo.map((c) => c.name).join(", "),
+  },
+  { accessorKey: "xp", header: "Experiencia" },
+  {
+    accessorKey: "achievements",
+    header: "Logros",
+    cell: ({ row }) =>
+      row.original.achievements?.map((a) => a.name).join(", ") || "-",
+  },
   {
     id: "actions",
-    cell: ({ row }) => <ActionsCell course={row.original} />,
+    cell: ({ row }) => <ActionsCell activity={row.original} />,
   },
 ];

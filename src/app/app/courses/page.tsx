@@ -24,32 +24,49 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-import { UserIcon, BookLockIcon, PlusCircleIcon } from "lucide-react";
+import { toast } from "sonner";
+import { UserIcon, BookLockIcon } from "lucide-react";
 import { DropdownMenuRadioItem } from "@radix-ui/react-dropdown-menu";
 import { testCourses } from "@/lib/testdata";
-
-type Activity = {
-  name: string;
-};
 
 export default function Courses() {
   const user = useUserStore((s) => s.user);
   const data: Course[] = testCourses;
 
-  const [isAddUserDialogOpen, setIsUserDialogOpen] = useState(false);
-  const [status, setStatus] = useState<"Publicado" | "Privado" | "Borrador">(
-    "Borrador"
-  );
+  const [isAddCourseDialogOpen, setIsAddCourseDialogOpen] = useState(false);
+  const [status, setStatus] = useState<Course["status"]>("active");
   const [instructor, setInstructor] = useState<string>("Sergio Angel");
-  const [activities, setActivities] = useState<Activity[]>([]);
+  const [name, setName] = useState("");
+  const [activitiesCount, setActivitiesCount] = useState(0);
+  const [submissions, setSubmissions] = useState(0);
 
-  const handleNewUserRequest = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleNewCourseRequest = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    alert(`Curso creado con ${activities.length} actividad(es)`);
-  };
+    setIsAddCourseDialogOpen(false);
 
-  const handleAddActivity = (newActivity: Activity) => {
-    setActivities((prev) => [...prev, newActivity]);
+    toast.success(`Curso creado correctamente.`, {
+      action: {
+        label: "Cerrar",
+        onClick: () => console.log("Undo clicked"),
+      },
+    });
+
+    // Aquí podrías agregar el curso a tu store o data si quieres
+    console.log({
+      id: Date.now().toString(),
+      name,
+      status,
+      instructor,
+      activities: activitiesCount,
+      submissions,
+    });
+
+    // Limpiar formulario
+    setName("");
+    setStatus("active");
+    setInstructor("Sergio Angel");
+    setActivitiesCount(0);
+    setSubmissions(0);
   };
 
   if (!user) {
@@ -80,13 +97,17 @@ export default function Courses() {
       <DataTable
         columns={columns}
         data={data}
-        setIsUserDialogOpen={setIsUserDialogOpen}
+        setIsUserDialogOpen={setIsAddCourseDialogOpen}
       />
-      {isAddUserDialogOpen && (
-        <Dialog open={isAddUserDialogOpen} onOpenChange={setIsUserDialogOpen}>
+
+      {isAddCourseDialogOpen && (
+        <Dialog
+          open={isAddCourseDialogOpen}
+          onOpenChange={setIsAddCourseDialogOpen}
+        >
           <DialogContent>
             <form
-              onSubmit={handleNewUserRequest}
+              onSubmit={handleNewCourseRequest}
               className="flex flex-col gap-3"
             >
               <DialogHeader>
@@ -108,6 +129,8 @@ export default function Courses() {
                   type="text"
                   required
                   placeholder="Nombre del curso"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                 />
               </div>
 
@@ -117,7 +140,7 @@ export default function Courses() {
                     htmlFor="courseStatus"
                     className="text-sm block text-muted-foreground"
                   >
-                    Estado:
+                    Estado
                   </label>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
@@ -130,19 +153,17 @@ export default function Courses() {
                       <DropdownMenuRadioGroup
                         value={status}
                         onValueChange={(value) =>
-                          setStatus(
-                            value as "Publicado" | "Privado" | "Borrador"
-                          )
+                          setStatus(value as Course["status"])
                         }
                         className="space-y-2"
                       >
-                        {["Publicado", "Privado", "Borrador"].map((r) => (
+                        {["active", "archived", "closed"].map((s) => (
                           <DropdownMenuRadioItem
-                            key={r}
-                            value={r}
+                            key={s}
+                            value={s}
                             className="text-sm capitalize"
                           >
-                            {r}
+                            {s}
                           </DropdownMenuRadioItem>
                         ))}
                       </DropdownMenuRadioGroup>
@@ -155,7 +176,7 @@ export default function Courses() {
                     htmlFor="courseInstructor"
                     className="text-sm block text-muted-foreground"
                   >
-                    Instructor:
+                    Instructor
                   </label>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
@@ -185,42 +206,36 @@ export default function Courses() {
                 </div>
               </div>
 
-              <div className="space-y-2 mt-5">
-                <div className="flex items-center justify-between">
-                  <span className="text-muted-foreground text-sm block w-fit">
-                    Actividades ({activities.length})
-                  </span>
-                  <Button
-                    variant="outline"
-                    type="button"
-                    onClick={() => handleAddActivity({ name: "Test step" })}
-                  >
-                    <PlusCircleIcon className="w-4 h-4" />
-                    Nueva actividad
-                  </Button>
+              <div className="grid grid-cols-2 gap-4 mt-2">
+                <div className="space-y-2">
+                  <label className="text-sm text-muted-foreground">
+                    Actividades
+                  </label>
+                  <Input
+                    type="number"
+                    min={0}
+                    value={activitiesCount}
+                    onChange={(e) => setActivitiesCount(Number(e.target.value))}
+                  />
                 </div>
 
-                <div className="border border-border rounded-sm p-2">
-                  {activities.length === 0 ? (
-                    <span className="text-muted-foreground text-sm">
-                      No has agregado ninguna actividad.
-                    </span>
-                  ) : (
-                    <div className="bg-accent p-2">
-                      <ul>
-                        {activities.map((activity) => (
-                          <li key={activity.name}>{activity.name}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
+                <div className="space-y-2">
+                  <label className="text-sm text-muted-foreground">
+                    Submissions
+                  </label>
+                  <Input
+                    type="number"
+                    min={0}
+                    value={submissions}
+                    onChange={(e) => setSubmissions(Number(e.target.value))}
+                  />
                 </div>
               </div>
 
               <DialogFooter className="pt-4">
                 <Button
                   variant="outline"
-                  onClick={() => setIsUserDialogOpen(false)}
+                  onClick={() => setIsAddCourseDialogOpen(false)}
                 >
                   Cancelar
                 </Button>

@@ -10,16 +10,6 @@ import useUserStore from "@/stores/UserStore";
 
 const Dashboard = () => {
   const user = useUserStore((state) => state.user);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-    useUserStore.getState().loadUserFromStorage();
-  }, []);
-
-  if (!mounted) {
-    return null;
-  }
 
   if (!user) {
     return (

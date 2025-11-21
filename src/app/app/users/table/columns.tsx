@@ -1,5 +1,6 @@
 "use client";
 
+import { toast } from "sonner";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown, MoreHorizontal, UserIcon } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -37,13 +38,15 @@ function UserActionsCell({ user }: { user: User }) {
 
   const handleUserDeletion = () => {
     setIsDeletionDialogOpen(false);
-    window.location.reload();
+    toast.success(`Usuario "${user.email}" eliminado correctamente`, {
+      description: "Esta acción no se puede deshacer",
+    });
   };
 
   const handleUserEdit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsEditDialogOpen(false);
-    // lógica de edición
+    toast.success(`Usuario "${user.email}" actualizado correctamente`);
   };
 
   return (
@@ -57,7 +60,14 @@ function UserActionsCell({ user }: { user: User }) {
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>Acciones</DropdownMenuLabel>
-          <DropdownMenuItem>Copiar ID</DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={async () => {
+              await navigator.clipboard.writeText(user.id);
+              toast.success(`ID "${user.id}" copiado al portapapeles`);
+            }}
+          >
+            Copiar ID
+          </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={() => setIsEditDialogOpen(true)}>
             Editar
@@ -122,8 +132,8 @@ function UserActionsCell({ user }: { user: User }) {
                   id="newUserNames"
                   type="text"
                   required
-                  placeholder={user.firstname}
-                  defaultValue={user.firstname}
+                  placeholder={user.name}
+                  defaultValue={user.name}
                 />
               </div>
 

@@ -28,6 +28,7 @@ import {
 import { UserIcon } from "lucide-react";
 import { DropdownMenuRadioItem } from "@radix-ui/react-dropdown-menu";
 import { testUsers } from "@/lib/testdata";
+import { toast } from "sonner";
 
 export default function UsersPage() {
   const user = useUserStore((s) => s.user);
@@ -35,7 +36,15 @@ export default function UsersPage() {
   const [isAddUserDialogOpen, setIsUserDialogOpen] = useState(false);
   const [rol, setRole] = useState("Estudiante");
   const handleNewUserRequest = (e: React.FormEvent<HTMLFormElement>) => {
-    alert(e.timeStamp);
+    e.preventDefault();
+    setIsUserDialogOpen(false);
+
+    toast.success("Usuario creado correctamente", {
+      action: {
+        label: "Ok",
+        onClick: () => {},
+      },
+    });
   };
 
   if (!user) {

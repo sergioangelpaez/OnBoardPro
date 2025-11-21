@@ -13,7 +13,7 @@ const poppins = Poppins({
 });
 
 export const metadata = {
-  title: "Onboard Pro - Login",
+  title: "Onboard Pro",
   icons: {
     icon: "/favicon.svg",
   },
